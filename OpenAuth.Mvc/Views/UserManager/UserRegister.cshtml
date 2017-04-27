@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--编辑对话框-->
+<div id="editDlg">
+    <div class="col-xs-12">
+        <form class="form-horizontal" id="editForm">
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for=""> 账号 </label>
+                <div class="col-sm-9">
+                    <input type="text" id="Account" v-model="Account" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for=""> 姓名 </label>
+                <div class="col-sm-9">
+                    <input type="text" id="Name" v-model="Name" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for=""> 密码 </label>
+                <div class="col-sm-9">
+                    <input type="text" id="Password" v-model="Password" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for=""> 类型 </label>
+                <div class="col-sm-9">
+                    <input type="text" id="Type" v-model="Type" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for=""> 微信号 </label>
+                <div class="col-sm-9">
+                    <input type="text" id="WeChat" v-model="WeChat" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/BllScripts/UserManager.js"></script>
+<script src="~/BllScripts/jqEvent.js"></script>

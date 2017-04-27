@@ -1,0 +1,44 @@
+﻿@model OpenAuth.App.SSO.LoginResult
+
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>OpenAuth.net测试站点登陆</h2>
+
+
+@if (Model != null && !Model.Success)
+{
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Warning!</strong>  @Model.ErrorMsg
+    </div>
+}
+
+<div class="col-lg-12">
+    <form class="form-horizontal" method="POST">
+        <div class="control-group">
+            <label class="control-label" for="username">用户名</label>
+            <div class="controls">
+                <input type="text" id="username" name="username" value="admin">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">密码</label>
+            <div class="controls">
+                <input type="password" id="password" name="password" value="admin">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox"> Remember me
+                </label>
+                <button type="submit" class="btn btn-primary">登陆</button>
+                <a href="http://localhost:52789/SSO/Login?appkey=@ViewBag.AppKey">或者使用OpenAuth.net第三方登陆功能</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
