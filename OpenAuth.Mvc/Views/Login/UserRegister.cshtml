@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>登录页面 - 达库文档管理系统</title>
+
+    <meta name="description" content="User login page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <link href="/Content/scripts/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link href="/Content/ace/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="/Content/ace/css/ace.css" rel="stylesheet" />
+    <link href="~/Content/scripts/layui/css/layui.css" rel="stylesheet" />
+    <!-- bootstrap & fontawesome -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="/Content/ace/css/ace-fonts.css" />
+    <script src="/Content/scripts/jquery/jQuery-2.1.4.min.js"></script>
+    <script src="~/Content/vue.js"></script>
+    <script src="/Content/scripts/layui/layui.js"></script>
+    <script type="text/javascript">
+        var layer;
+        layui.use(['layer'], function () {
+            layer = layui.layer;
+        });
+    </script>
+</head >
+
+<!--编辑对话框-->
+            <body class="main-content">
+                <div class="login-box visible widget-box no-border">
+                    <div class="main-container">
+                        <div class="main-content">
+                            <div class="row">
+                                <br /><br /><br />
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="position-relative">
+                                        <div id="login-box" class="login-box visible widget-box no-border">
+                                            <div class="widget-body">
+                                                <div class="widget-main">
+                                                    <h4 class="header blue lighter bigger">
+                                                        <i class="ace-icon fa fa-coffee"></i>
+                                                        请输入您的注册信息
+                                        </h4>
+
+                                                    <div class="space-6"></div>
+                                                    <div>
+                                                        <form class="layui-form" id="editForm">
+
+                                                            <div class="layui-form-item">
+                                                                <label class="col-sm-3 control-label no-padding-right" for=""> 登录账号 </label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" id="Account" v-model="Account" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="layui-form-item">
+                                                                <label class="col-sm-3 control-label no-padding-right" for=""> 姓名 </label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" id="Name" v-model="Name" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="layui-form-item">
+                                                                <label class="col-sm-3 control-label no-padding-right" for=""> 密码 </label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" id="Password" v-model="Password" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="layui-form-item">
+                                                                <label class="col-sm-3 control-label no-padding-right" for=""> 单位名称 </label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" id="Customer_Name" v-model="Customer_Name" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="layui-form-item">
+                                                                <label class="col-sm-3 control-label no-padding-right" for=""> 单位地址 </label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" id="Customer_Addr" v-model="Customer_Addr" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="layui-form-item">
+                                                                <label class="col-sm-3 control-label no-padding-right" for=""> 单位联系人 </label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" id="Contacts" v-model="Contacts" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="layui-form-item">
+                                                                <label class="col-sm-3 control-label no-padding-right" for=""> 手机号码 </label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" id="Contact_Mob" v-model="Contact_Mob" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="layui-form-item">
+                                                                <label class="col-sm-3 control-label no-padding-right" for=""> 电话号码 </label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" id="Contact_Tel" v-model="Contact_Tel" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="layui-form-item">
+                                                                <div class="col-sm-12">
+                                                                    <input type="button" id="btnOK" value="保 存" />
+                                                                    <input type="button" id="btnReset" value="重 置" />
+                                                                </div>
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+</html >
+
+
+            <script src="~/BllScripts/Business/user_register.js"></script>

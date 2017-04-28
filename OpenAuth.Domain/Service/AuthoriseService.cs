@@ -63,7 +63,8 @@ namespace OpenAuth.Domain.Service
             set
             {
                 _user = value;
-                _userRoleIds = _unitWork.Find<Relevance>(u => u.FirstId == _user.Id && u.Key == "UserRole").Select(u => u.SecondId).ToList();
+                if (value != null)
+                    _userRoleIds = _unitWork.Find<Relevance>(u => u.FirstId == _user.Id && u.Key == "UserRole").Select(u => u.SecondId).ToList();
             }
         }
 

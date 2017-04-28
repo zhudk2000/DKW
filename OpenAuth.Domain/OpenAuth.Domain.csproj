@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\Customer.cs" />
     <Compile Include="Core\Category.cs" />
     <Compile Include="Core\CustomerInfo.cs" />
     <Compile Include="Core\UserExt.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Core\WFSchemeContent.cs" />
     <Compile Include="Core\WFSchemeInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

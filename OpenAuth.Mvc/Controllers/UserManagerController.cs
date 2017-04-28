@@ -124,12 +124,6 @@ namespace OpenAuth.Mvc.Controllers
         }
         #endregion
 
-        [HttpPost]
-        public string UserRegister()
-        {
-            string result = "";
-            //
-            return result;
-        }
+
     }
 }

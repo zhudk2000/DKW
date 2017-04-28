@@ -11,7 +11,7 @@ namespace OpenAuth.App
     public class CustomerApp
     {
         private CustomerRepository _repository = new CustomerRepository();
-        //
+        
         public void Add(CustomerInfo cust)
         {
             _repository.Add(cust);

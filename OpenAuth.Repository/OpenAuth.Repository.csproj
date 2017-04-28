@@ -63,6 +63,7 @@
     <Compile Include="Models\Mapping\WFProcessTransitionHistoryMap.cs" />
     <Compile Include="Models\Mapping\WFSchemeContentMap.cs" />
     <Compile Include="Models\Mapping\WFSchemeInfoMap.cs" />
+    <Compile Include="Business\RepositoryCustomer.cs" />
     <Compile Include="UnitWork.cs" />
     <Compile Include="BaseRepository.cs" />
     <Compile Include="Models\Mapping\CategoryMap.cs" />
@@ -107,6 +108,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

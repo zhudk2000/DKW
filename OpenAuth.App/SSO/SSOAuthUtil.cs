@@ -35,6 +35,16 @@ namespace OpenAuth.App.SSO
                         Password = "123456"
                     };
                 }
+                if (model.UserName == "guest")
+                {
+                    userInfo = new User
+                    {
+                        Id = Guid.Empty,
+                        Account = "guest",
+                        Name = "游客",
+                        Password = ""
+                    };
+                }
                 else
                 {
                     var usermanager = (UserManagerApp)DependencyResolver.Current.GetService(typeof(UserManagerApp));
@@ -45,9 +55,11 @@ namespace OpenAuth.App.SSO
                 {
                     throw new Exception("用户不存在");
                 }
-                if (userInfo.Password != model.Password)
-                {
-                    throw new Exception("密码错误");
+                if (userInfo.Account != "guest") {
+                    if (userInfo.Password != model.Password)
+                    {
+                        throw new Exception("密码错误");
+                    }
                 }
 
                 var currentSession = new UserAuthSession

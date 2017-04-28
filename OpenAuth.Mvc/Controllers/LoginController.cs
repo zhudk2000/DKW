@@ -3,6 +3,8 @@ using System.Configuration;
 using System.Web.Mvc;
 using Infrastructure;
 using OpenAuth.App.SSO;
+using OpenAuth.Domain.Business;
+using OpenAuth.App.Business;
 
 namespace OpenAuth.Mvc.Controllers
 {
@@ -31,7 +33,7 @@ namespace OpenAuth.Mvc.Controllers
                 }
                 else
                 {
-                    resp.Message = "登陆失败";
+                    resp.Message = "登录失败";
                 }
             }
             catch (Exception e)
@@ -71,5 +73,50 @@ namespace OpenAuth.Mvc.Controllers
             AuthUtil.Logout();
             return RedirectToAction("Index", "Login");
         }
+
+        /// <summary>
+        /// 用户自助注册
+        /// </summary>
+        public ActionResult Login4Registration()
+        {
+            try
+            {
+                var result = AuthUtil.Login(_appKey, "guest", "123456");
+                if (result.Success)
+                    return Redirect("/Login/UserRegister?Token=" + result.Token);
+                else
+                {
+                    return RedirectToAction("Index", "Login");
+                }
+
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+
+        public ActionResult UserRegister()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public string UserRegister(Customer view)
+        {
+            CustomerApplication app = AutofacExt.GetFromFac<CustomerApplication>();
+            Infrastructure.Response result = new Infrastructure.Response();
+            try
+            {
+                app.Add(view);
+            }
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = ex.Message;
+            }
+            return JsonHelper.Instance.Serialize(result);
+        }
+
     }
 }
