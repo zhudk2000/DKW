@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\DBUtility.cs" />
     <Compile Include="CustomerRepository.cs" />
     <Compile Include="Models\Mapping\WFFrmMainMap.cs" />
     <Compile Include="Models\Mapping\WFProcessInstanceMap.cs" />

@@ -16,5 +16,15 @@ namespace OpenAuth.App.Business
         {
             _repo.Add(cust);
         }
+
+        public int IsCustomerNameExist(string custName)
+        {
+            return _repo.IsCustomerNameExist(custName);
+        }
+
+        public int IsUseridExist(string usrName)
+        {
+            return _repo.IsUseridExist(usrName);
+        }
     }
 }

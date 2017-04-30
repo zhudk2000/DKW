@@ -3,7 +3,7 @@
 
     $("#btnOK").click(
         function () {
-            var tmpObj = layer.confirm("您确定要创建用户吗？",
+            var tmpObj = layer.confirm("您确定要创建用户吗？" + vm.$data.Name,
                 null,
                 function () {
                     layer.close(tmpObj);
@@ -12,6 +12,16 @@
                             layer.msg("创建成功！！！");
                         }
                     }, "json");
+                });
+        }
+    );
+
+    $("#btnReset").click(
+        function () {
+            vm.$set('$data',
+                {
+                    Account: '',
+                    Name: '',
                 });
         }
     );
