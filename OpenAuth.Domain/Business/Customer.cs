@@ -23,6 +23,12 @@ namespace OpenAuth.Domain.Business
             this.Payment_Method = string.Empty;
             this.Bank = string.Empty;
             this.Bank_Acct = string.Empty;
+            this.Customer_Type = 0;
+
+            this.User_Account = string.Empty;
+            this.User_Name = string.Empty;
+            this.User_Password = string.Empty;
+
         }
 
         public string Customer_ID { get; set; }
@@ -38,5 +44,11 @@ namespace OpenAuth.Domain.Business
         public string Payment_Method { get; set; }
         public string Bank { get; set; }
         public string Bank_Acct { get; set; }
+        public int Customer_Type { get; set; }
+
+        public string User_Account { get; set; }
+        public string User_Password { get; set; }
+        public string User_Name { get; set; }
+        //Account, Password, Name
     }
 }

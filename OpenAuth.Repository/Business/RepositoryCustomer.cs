@@ -19,7 +19,8 @@ namespace OpenAuth.Repository.Business
     {
         public void Add(Customer entity)
         {
-            string sql = @"
+            int newCustID = GetNextCustID();
+            string sqlCust = @"
 insert into customer(
     customer_id, customer_name, contacts, 
     contact_tel, contact_mob, cust_address, contact_number, 
@@ -33,14 +34,43 @@ insert into customer(
 )";
             DBUtility db = new DBUtility();
             DbCommand cmd = base.GetDbCommandObject();
-            cmd.CommandText = sql;
-            db.NewParaWithValue("customer_id", DbType.String, GetNextCustID(), ref cmd);
+            cmd.CommandText = sqlCust;
+            db.NewParaWithValue("customer_id", DbType.String, newCustID.ToString(), ref cmd);
+            db.NewParaWithValue("customer_name", DbType.String, entity.Customer_Name, ref cmd);
+            db.NewParaWithValue("contacts", DbType.String, entity.Contacts, ref cmd);
+            db.NewParaWithValue("contact_tel", DbType.String, entity.Contact_Tel, ref cmd);
+            db.NewParaWithValue("contact_mob", DbType.String, entity.Contact_Mob, ref cmd);
+            db.NewParaWithValue("cust_address", DbType.String, entity.Customer_Addr, ref cmd);
+            db.NewParaWithValue("contact_number", DbType.String, entity.Contract_Num, ref cmd);
+            db.NewParaWithValue("Cust_type", DbType.String, entity.Customer_Type, ref cmd);
+            db.NewParaWithValue("advance_amount", DbType.Decimal, entity.Advance_Amt, ref cmd);
+            db.NewParaWithValue("credit", DbType.Decimal, entity.Credit, ref cmd);
+            db.NewParaWithValue("account_method", DbType.String, entity.Amount_Method, ref cmd);
+            db.NewParaWithValue("payment_method", DbType.String, entity.Payment_Method, ref cmd);
+            db.NewParaWithValue("bank", DbType.String, entity.Bank, ref cmd);
+            db.NewParaWithValue("bank_account", DbType.String, entity.Bank_Acct, ref cmd);
 
+            string sqlUser = @"
+insert into user(
+    Account, Password, Name, Sex, 
+    Status, Type, CreateTime, CrateId, customer_id
+) values(
+    @Account, @Password, @Name, 0, 
+    0, 0, getdate(), 'self-register', @customer_id
+)";
             DbTransaction dt = null;
             try
             {
                 cmd.Connection.Open();
                 dt = cmd.Connection.BeginTransaction();
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = sqlUser;
+                cmd.Parameters.Clear();
+                db.NewParaWithValue("Account", DbType.String, entity.User_Account, ref cmd);
+                db.NewParaWithValue("Password", DbType.String, entity.User_Password, ref cmd);
+                db.NewParaWithValue("Name", DbType.String, entity.User_Name, ref cmd);
+                db.NewParaWithValue("customer_id", DbType.String, newCustID.ToString(), ref cmd);
                 cmd.ExecuteNonQuery();
 
                 dt.Commit();
