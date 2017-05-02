@@ -7,10 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
     <title>登录页面 - 达库文档管理系统</title>
-
     <meta name="description" content="User login page" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
     <link href="/Content/scripts/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <link href="/Content/ace/css/font-awesome.min.css" rel="stylesheet" />
@@ -20,96 +18,82 @@
     <!-- bootstrap & fontawesome -->
     <!-- text fonts -->
     <link rel="stylesheet" href="/Content/ace/css/ace-fonts.css" />
-
 </head>
-
-<body class="login-layout" style="background-image: url('/Content/Images/login/bg.jpg'); ">
-    <div class="main-container">
+<body class="login-layout img-responsive" style="background-image: url('/Content/Images/login/bg.jpg'); background-repeat:no-repeat; background-size:cover">
+    <div class="main-container"  >
+        <div style="height:170px;"></div>
         <div class="main-content">
             <div class="row">
                 <div class="col-md-10 col-sm-offset-1">
                     <div class="login-container">
-                        <div class="space-6"></div>
-                        <div class="space-6"></div>
+                        <div class="space-6 line-height-150"></div>
                         <div class="center layui-form-item">
-                                @*<i class="ace-icon fa fa-users blue"></i>*@
-                                <img class="col-md-2 right" src="~/Content/Images/login/logo.png"/>
+                            @*<i class="ace-icon fa fa-users blue"></i>*@
+                            @*<img class="col-md-2 right" src="~/Content/Images/login/logo.png"/>*@
                             <div class="col-md-10">
-                                <div class="white bigger-140 left row">深圳达库文档案存储服务有限公司</div>
-                                <div class="white smaller-40 left row">SHENZHENG Document Storage Service International Inc.</div>
-
+                                @*<div class="white bigger-140 left row">深圳达库文档案存储服务有限公司</div>
+                                    <div class="white smaller-40 left row">SHENZHENG Document Storage Service International Inc.</div>*@
+                                @*<img src="~/Content/Images/login/logo_title.jpg" />*@
                             </div>
-
-                        <div class="layui-form-item"></div>
-                        <div class="space-6"></div>
-
-                        <div class="layui-form-item">
-                            <div id="login-box" class="login-box visible widget-box no-border">
-                                <div class="widget-body">
-                                    <div class="widget-main">
-                                        <h4 class="header blue lighter bigger">
-                                            <i class="ace-icon fa fa-coffee"></i>
-                                            请输入您的登录信息
-                                        </h4>
-
-                                        <div class="space-6"></div>
-
-                                        <!-- Login form -->
-                                        <form class="layui-form">
-                                            <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
-                                            <div class="layui-form-item">
-                                                <label class="layui-form-label">用户名</label>
-                                                <div class="layui-input-block">
-                                                    <input type="text" name="username" placeholder="请输入" lay-verify="required" autocomplete="off" class="layui-input">
+                            <div class="layui-form-item">
+                                <div id="login-box" class="login-box visible widget-box no-border">
+                                    <div class="widget-body">
+                                        <div class="widget-main">
+                                            <h4 class="header blue lighter bigger left">
+                                                <i class="ace-icon fa fa-coffee"></i>
+                                                请输入您的登录信息
+                                            </h4>
+                                            <div class="space-6"></div>
+                                            <!-- Login form -->
+                                            <form class="layui-form">
+                                                <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+                                                <div class="layui-form-item">
+                                                    <label class="layui-form-label">用户名</label>
+                                                    <div class="layui-input-block">
+                                                        <input type="text" name="username" placeholder="请输入" lay-verify="required" autocomplete="off" class="layui-input">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="layui-form-item">
-                                                <label class="layui-form-label">密码</label>
-                                                <div class="layui-input-block">
-                                                    <input type="password" name="password" placeholder="请输入" lay-verify="required" autocomplete="off" class="layui-input">
+                                                <div class="layui-form-item">
+                                                    <label class="layui-form-label">密码</label>
+                                                    <div class="layui-input-block">
+                                                        <input type="password" name="password" placeholder="请输入" lay-verify="required" autocomplete="off" class="layui-input">
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="layui-form-item">
-                                                <div class="layui-input-block">
-                                                    <button class="layui-btn" lay-submit lay-filter="*">登录</button>
-                                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                                <div class="layui-form-item">
+                                                    <div class="layui-input-block">
+                                                        <button class="layui-btn" lay-submit lay-filter="*">登录</button>
+                                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="layui-form-item">
-                                                <div class="layui-input-block">
-                                                    @*<a href="~/UserManager/UserRegister?act=register">注册新用户</a>*@
-                                                    <a href="~/Login/Login4Registration">注册新用户</a>
-                                                    
+                                                <div class="header"></div>
+                                                <div class="layui-form-item">
+                                                    <div class="col-sm3 layui-inline blue lighter"><a href="#">忘记密码</a></div>
+                                                    <div class="col-sm6 layui-inline"></div>
+                                                    <div class="col-sm3 layui-inline blue lighter"><a href="~/Login/Login4Registration">注册新用户</a></div>
                                                 </div>
+                                            </form>
+                                            <script src="~/Content/scripts/jquery/jQuery-2.1.4.min.js"></script>
+                                            <script src="~/Content/scripts/layui/layui.js"></script>
+                                            <script src="~/BllScripts/login.js"></script>
+                                            <!-- <div class="social-or-login center">
+                                                <span class="bigger-110">Or Login Using</span>
                                             </div>
-                                        </form>
 
-                                        <script src="~/Content/scripts/jquery/jQuery-2.1.4.min.js"></script>
-                                        <script src="~/Content/scripts/layui/layui.js"></script>
-                                        <script src="~/BllScripts/login.js"></script>
+                                            <div class="space-6"></div>
 
-                                        <!-- <div class="social-or-login center">
-                                            <span class="bigger-110">Or Login Using</span>
-                                        </div>
-
-                                        <div class="space-6"></div>
-
-                                        <div class="center">
-                                            <a href="/Login/LoginByDev" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> 点击以开发者账号登录</a>
-                                            <a href="http://localhost:52789/SSO/Login?appkey=@ViewBag.AppKey" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-user-secret"></i>OpenAuth.net第三方登陆功能</a>
-                                        </div> -->
-                                    </div><!-- /.widget-main -->
-
-                                </div><!-- /.widget-body -->
-                            </div><!-- /.login-box -->
-                        </div><!-- /.position-relative -->
-                    </div>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.main-content -->
-    </div><!-- /.main-container -->
-    <!-- basic scripts -->
+                                            <div class="center">
+                                                <a href="/Login/LoginByDev" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-user"></i> 点击以开发者账号登录</a>
+                                                <a href="http://localhost:52789/SSO/Login?appkey=@ViewBag.AppKey" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-user-secret"></i>OpenAuth.net第三方登陆功能</a>
+                                            </div> -->
+                                        </div><!-- /.widget-main -->
+                                    </div><!-- /.widget-body -->
+                                </div><!-- /.login-box -->
+                            </div><!-- /.position-relative -->
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.main-content -->
+        </div><!-- /.main-container -->
+        <!-- basic scripts -->
 </body>
 </html>

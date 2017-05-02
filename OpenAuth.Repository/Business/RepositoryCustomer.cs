@@ -51,18 +51,19 @@ insert into customer(
             db.NewParaWithValue("bank_account", DbType.String, entity.Bank_Acct, ref cmd);
 
             string sqlUser = @"
-insert into user(
-    Account, Password, Name, Sex, 
+insert into [user](
+    id, Account, Password, Name, Sex, 
     Status, Type, CreateTime, CrateId, customer_id
 ) values(
-    @Account, @Password, @Name, 0, 
-    0, 0, getdate(), 'self-register', @customer_id
+    newid(), @Account, @Password, @Name, 0, 
+    0, 0, getdate(), NULL, @customer_id
 )";
             DbTransaction dt = null;
             try
             {
-                cmd.Connection.Open();
+                if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
                 dt = cmd.Connection.BeginTransaction();
+                cmd.Transaction = dt;
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = sqlUser;
@@ -98,7 +99,7 @@ insert into user(
                 cmd.CommandType = CommandType.Text;
                 try
                 {
-                    cmd.Connection.Open();
+                    if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
                     string s = cmd.ExecuteScalar().ToString();
                     if (s != string.Empty)
                         result = int.Parse(s.Trim()) + 1;
@@ -117,7 +118,7 @@ insert into user(
         public int IsUseridExist(string usrName)
         {
             int result = 0;
-            string sql = "select count(*) from user where Account = @acct";
+            string sql = "select count(*) from [user] where Account = @acct";
 
             using (DbCommand cmd = base.GetDbCommandObject())
             {
@@ -132,7 +133,7 @@ insert into user(
 
                 try
                 {
-                    cmd.Connection.Open();
+                    if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
                     result = int.Parse(cmd.ExecuteScalar().ToString());
                 }
                 catch (Exception e) { }
@@ -163,7 +164,7 @@ insert into user(
 
                 try
                 {
-                    cmd.Connection.Open();
+                    if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
                     result = int.Parse(cmd.ExecuteScalar().ToString());
                 }
                 catch (Exception e) { }

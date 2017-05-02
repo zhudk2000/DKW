@@ -280,7 +280,10 @@
     <Content Include="Content\ace\js\src\elements.wizard.js" />
     <Content Include="Content\ace\js\src\elements.wysiwyg.js" />
     <Content Include="Content\Images\datepicker_icon.png" />
+    <Content Include="Content\Images\login\logo.png" />
+    <Content Include="Content\Images\login\logo_title.jpg" />
     <Content Include="Content\Images\table_guide.png" />
+    <Content Include="Content\scripts\business\public.js" />
     <Content Include="Content\scripts\dist\css\bootstrap-select.css" />
     <Content Include="Content\scripts\dist\css\bootstrap-select.min.css" />
     <Content Include="Content\scripts\dist\js\bootstrap-select.js" />

@@ -118,5 +118,40 @@ namespace OpenAuth.Mvc.Controllers
             return JsonHelper.Instance.Serialize(result);
         }
 
+        [HttpPost]
+        public string IsUseridExist(string usrName)
+        {
+            CustomerApplication app = AutofacExt.GetFromFac<CustomerApplication>();
+            Infrastructure.Response result = new Infrastructure.Response();
+            try
+            {
+                result.Message = app.IsUseridExist(usrName).ToString();
+            }
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = ex.Message;
+            }
+            return JsonHelper.Instance.Serialize(result);
+        }
+
+        [HttpPost]
+        public string IsCustomerNameExist(string custName)
+        {
+            CustomerApplication app = AutofacExt.GetFromFac<CustomerApplication>();
+            Infrastructure.Response result = new Infrastructure.Response();
+            try
+            {
+                result.Message = app.IsCustomerNameExist(custName).ToString();
+            }
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = ex.Message;
+            }
+            return JsonHelper.Instance.Serialize(result);
+        }
+
+
     }
 }

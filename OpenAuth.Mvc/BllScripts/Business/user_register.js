@@ -25,5 +25,19 @@
                 });
         }
     );
+
+    $("#Account").change(function () {
+        validateAccount();
+    });
+
+    function validateAccount() {
+        var tmp = getWebserviceStr("/Login/IsUseridExist", { usrName: $("#Account").val() });
+        if (tmp && (tmp != "0")) {
+            layer.msg("用户名已存在！");
+            $("#Account").focus();
+            return false;
+        } else
+            return true;
+    }
 });
 
