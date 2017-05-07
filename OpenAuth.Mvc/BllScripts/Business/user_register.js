@@ -9,13 +9,15 @@
             } else {
                 // validate controls
                 if (validateAllObjects()) {
-                    var tmpObj = layer.confirm("您确定要创建用户吗？" + vm.$data.Name,
+                    var tmpObj = layer.confirm("您确定要创建用户吗？" + vm.$data.User_Account,
                         null,
                         function () {
                             layer.close(tmpObj);
                             $.post("/Login/UserRegister", vm.$data, function (data) {
                                 if (data.Status) {
-                                    layer.msg("创建成功！！！");
+                                    layer.msg("用户名(" + $("#Account").val() + ")创建成功，即将转入登录页面！！！");
+                                    $.delay(1000);
+                                    
                                 }
                             }, "json");
                         });
@@ -28,8 +30,9 @@
         function () {
             vm.$set('$data',
                 {
-                    Account: '',
-                    Name: '',
+                    User_Account: '',
+                    User_Name: '',
+                    User_Password: '',
                 });
         }
     );
