@@ -50,61 +50,63 @@
                                                 <div class="layui-form-item">
                                                     <label class="col-sm-3 control-label no-padding-right" for=""> 登录账号 </label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="Account" v-model="Account" placeholder="请输入登录账号" maxlength="10" />
+                                                        <input type="text" id="Account" v-model="User_Account" placeholder="请输入登录账号" maxlength="10" />
                                                     </div>
                                                 </div>
                                                 <div class="layui-form-item">
                                                     <label class="col-sm-3 control-label no-padding-right" for=""> 姓名 </label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="Name" v-model="Name" />
+                                                        <input type="text" id="Name" v-model="User_Name" placeholder="请输入姓名" />
                                                     </div>
                                                 </div>
                                                 <div class="layui-form-item">
                                                     <label class="col-sm-3 control-label no-padding-right" for=""> 密码 </label>
                                                     <div class="col-sm-9">
-                                                        <input type="password" id="Password" v-model="Password" />
+                                                        <input type="password" id="Password" v-model="User_Password" placeholder="请输入密码"/>
                                                     </div>
                                                 </div>
                                                 <div class="layui-form-item">
-                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 确认密码 </label>
+                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 再次输入密码 </label>
                                                     <div class="col-sm-9">
-                                                        <input type="password" id="Password2" />
+                                                        <input type="password" id="Password2" placeholder="请重复输入密码"/>
                                                     </div>
                                                 </div>
-                                                <div class="layui-form-item">
-                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 单位名称 </label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="Customer_Name" v-model="Customer_Name" />
+                                                <div id="divCompanyInfo" style="display:none">
+                                                    <div class="layui-form-item">
+                                                        <label class="col-sm-3 control-label no-padding-right" for=""> 单位名称 </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="Customer_Name" v-model="Customer_Name" placeholder="请输入所在单位名称"/>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="layui-form-item">
-                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 单位地址 </label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="Customer_Addr" v-model="Customer_Addr" />
+                                                    <div class="layui-form-item">
+                                                        <label class="col-sm-3 control-label no-padding-right" for=""> 单位地址 </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="Customer_Addr" v-model="Customer_Addr" placeholder="请输入所在单位地址"/>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="layui-form-item">
-                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 单位联系人 </label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="Contacts" v-model="Contacts" />
+                                                    <div class="layui-form-item">
+                                                        <label class="col-sm-3 control-label no-padding-right" for=""> 单位联系人 </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="Contacts" v-model="Contacts" placeholder="请输入单位联系人姓名"/>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="layui-form-item">
-                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 手机号码 </label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="Contact_Mob" v-model="Contact_Mob" />
+                                                    <div class="layui-form-item">
+                                                        <label class="col-sm-3 control-label no-padding-right" for=""> 手机号码 </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="Contact_Mob" v-model="Contact_Mob" placeholder="请输入联系人手机号码"/>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="layui-form-item">
-                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 电话号码 </label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="Contact_Tel" v-model="Contact_Tel" />
-                                                    </div>
+                                                    <div class="layui-form-item">
+                                                        <label class="col-sm-3 control-label no-padding-right" for=""> 电话号码 </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="Contact_Tel" v-model="Contact_Tel" placeholder="请输入联系人电话号码"/>
+                                                        </div>
+                                                    </div>    
                                                 </div>
                                                  <div class="layui-form-item">
                                                     <div class="col-sm-3"></div>
                                                     <div class="col-sm-9">
-                                                        <input type="button" id="btnOK" class="btn" value=" 保  存 " />
+                                                        <input type="button" id="btnOK" class="btn" value=" 继  续 " />
                                                         <input type="button" id="btnReset" class="btn" value=" 重  置"  />
                                                     </div>
                                                 </div>
