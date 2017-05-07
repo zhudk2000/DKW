@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\DBUtility.cs" />
+    <Compile Include="Business\RepositoryOrderCatch.cs" />
     <Compile Include="CustomerRepository.cs" />
     <Compile Include="Models\Mapping\WFFrmMainMap.cs" />
     <Compile Include="Models\Mapping\WFProcessInstanceMap.cs" />

@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\Customer.cs" />
+    <Compile Include="Business\OrderDetail.cs" />
+    <Compile Include="Business\OrderHeader.cs" />
     <Compile Include="Core\Category.cs" />
     <Compile Include="Core\CustomerInfo.cs" />
     <Compile Include="Core\UserExt.cs" />
