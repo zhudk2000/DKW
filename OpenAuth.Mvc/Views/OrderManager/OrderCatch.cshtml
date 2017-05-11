@@ -1,0 +1,141 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = null;
+}
+
+<div id="divBody1">
+    <!-- #section:basics/content.breadcrumbs -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="#">订单管理</a>
+            </li>
+            <li class="active">列表</li>
+        </ul><!-- /.breadcrumb -->
+    </div>
+    <!-- /section:basics/content.breadcrumbs -->
+    <!-- /section:basics/content.breadcrumbs -->
+    <div>
+        <div>
+            <div class="col-md-12" id="divOrderCatch">
+                <div class="col-md-12">
+                    <div class="widget-box widget-color-blue">
+                        <div class="widget-header">
+                            @Html.Action("MenuHeader", "Home")
+                        </div>
+
+                        <div>
+                            <form class="form-horizontal" id="editForm">
+                                <div class="form-group"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label no-padding-right" for=""> 计划箱数 </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="Quantity" v-model="Quantity" placeholder="计划箱数" maxlength="10" isvalid="yes" checkexpession="Num" errormsg="计划箱数" />箱
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label no-padding-right" for=""> 服务项目 </label>
+                                    <div class="col-sm-2">
+                                        <input type="text" id="Service_item" v-model="Service_item" placeholder="请选择" maxlength="60" isvalid="yes" checkexpession="NotNull" errormsg="服务项目" />
+                                    </div>
+                                    <label class="col-sm-1 control-label no-padding-right" for=""> 联系人 </label>
+                                    <div class="col-sm-2">
+                                        <input type="text" id="Contacts" v-model="Contacts" placeholder="请输入" maxlength="30" isvalid="yes" checkexpession="NotNull" errormsg="联系人" />
+                                    </div>
+                                    <label class="col-sm-1 control-label no-padding-right" for=""> 手机号码 </label>
+                                    <div class="col-sm-2">
+                                        <input type="text" id="Contact_tel" v-model="Contact_tel" placeholder="请输入" maxlength="11" isvalid="yes" checkexpession="Mobile" errormsg="手机号码" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label no-padding-right" for=""> 送箱地址 </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" isvalid="yes" checkexpession="NotNull" errormsg="送箱地址" class="input-xxlarge" id="Contact_address" v-model="Contact_address" placeholder="请输入送箱地址" maxlength="10" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-2 col-sm-offset-5">
+                                        <input type="button" class="btn-danger" value="订单提交" id="btnSubmit" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="hidden" id="Unit_price" v-model="Unit_price" value="5" />
+                                    <input type="hidden" id="Customer_id" v-model="Customer_id" />
+                                    <input type="hidden" id="Customer_name" v-model="Customer_name" />
+                                    <input type="hidden" id="User_ID" v-model="User_ID" />
+                                </div>
+
+                                <div class="form-group"><label class="col-sm-1 control-label no-padding-right bolder"> 温馨提示 </label></div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-11 text-left">
+                                        <p>1、系统提供的价格是含税价</p>
+                                        <p>2、低廉的价格，使每月所付存储费比自己管理还要省</p>
+                                        <p>3、优质的服务，体贴到位</p>
+                                        <p>4、高端的安防，可以放心睡大觉</p>
+                                        <p>5、先进的技术，快捷省钱</p>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-12" id="divOrderCatchPreview" style="display:none;">
+                <div class="col-md-12 row">
+                    <label class="col-md-12 text-center bigger-150 bolder">订&nbsp;&nbsp;单</label>
+                </div>
+                <div class="col-md-12 row header">
+                    <label class="col-md-6 text-right">订单号：</label>
+                    <label class="col-md-6 text-left" id="lblOrderID"></label>
+                </div>
+
+                <div class="col-md-12 row">
+                    <label class="col-md-6 text-right">单位名称：</label>
+                    <label class="col-md-6 text-left" id="lblCustName"></label>
+                </div>
+                <div class="col-md-12 row">
+                    <label class="col-md-6 text-right">服务项目：</label>
+                    <label class="col-md-6 text-left" id="lblServiceItem"></label>
+                </div>
+                <div class="col-md-12 row">
+                    <label class="col-md-6 text-right">存储箱数：</label>
+                    <label class="col-md-6 text-left" id="lblQuantity">箱</label>
+                </div>
+                <div class="col-md-12 row">
+                    <label class="col-md-6 text-right">联系人：</label>
+                    <label class="col-md-6 text-left" id="lblContact"></label>
+                </div>
+                <div class="col-md-12 row">
+                    <label class="col-md-6 text-right">手机号码：</label>
+                    <label class="col-md-6 text-left" id="lblContactMob"></label>
+                </div>
+                <div class="col-md-12 row">
+                    <label class="col-md-6 text-right">送箱地址：</label>
+                    <label class="col-md-6 text-left" id="lblAddress"></label>
+                </div>
+                <div class="col-md-12 row">
+                    <label class="col-md-6 text-right">存储单价：</label>
+                    <label class="col-md-6 text-left" id="lblUnitPrice">5</label>
+                </div>
+
+                <div class="col-md-12 row">
+                    <label class="col-md-12 text-center bigger-150 bolder">合计金额&nbsp;&nbsp;&nbsp;<span id="lblTotalAmount"></span>元/月</label>
+                </div>
+            </div>
+    </div><!-- /.page-content -->
+</div>
+
+
+<script src="~/Content/scripts/business/public.js"></script>
+<script src="~/BllScripts/Business/layer_validator.js"></script>
+<script src="~/BllScripts/Business/order_catch.js"></script>
+

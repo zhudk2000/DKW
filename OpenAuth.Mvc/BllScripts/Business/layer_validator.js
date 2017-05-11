@@ -21,7 +21,8 @@ $.fn.Validform = function () {
                         if (isNotNull(value)) {
                             Validatemsg = errormsg + "不能为空！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -30,7 +31,8 @@ $.fn.Validform = function () {
                         if (!isInteger(value)) {
                             Validatemsg = errormsg + "必须为数字！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -39,7 +41,8 @@ $.fn.Validform = function () {
                         if (!isIntegerOrNull(value)) {
                             Validatemsg = errormsg + "必须为数字！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -48,7 +51,8 @@ $.fn.Validform = function () {
                         if (!isEmail(value)) {
                             Validatemsg = errormsg + "必须为E-mail格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -57,7 +61,8 @@ $.fn.Validform = function () {
                         if (!isEmailOrNull(value)) {
                             Validatemsg = errormsg + "必须为E-mail格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -66,7 +71,8 @@ $.fn.Validform = function () {
                         if (!isEnglishStr(value)) {
                             Validatemsg = errormsg + "必须为字符串！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -75,7 +81,8 @@ $.fn.Validform = function () {
                         if (!isEnglishStrOrNull(value)) {
                             Validatemsg = errormsg + "必须为字符串！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -84,7 +91,8 @@ $.fn.Validform = function () {
                         if (!isLenNum(value, $(this).attr("length"))) {
                             Validatemsg = errormsg + "必须为" + $(this).attr("length") + "位数字！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -93,7 +101,8 @@ $.fn.Validform = function () {
                         if (!isLenNumOrNull(value, $(this).attr("length"))) {
                             Validatemsg = errormsg + "必须为" + $(this).attr("length") + "位数字！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -102,7 +111,8 @@ $.fn.Validform = function () {
                         if (!isLenStr(value, $(this).attr("length"))) {
                             Validatemsg = errormsg + "必须小于" + $(this).attr("length") + "位字符！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -111,7 +121,8 @@ $.fn.Validform = function () {
                         if (!isLenStrOrNull(value, $(this).attr("length"))) {
                             Validatemsg = errormsg + "必须小于" + $(this).attr("length") + "位字符！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -120,7 +131,8 @@ $.fn.Validform = function () {
                         if (!isTelephone(value)) {
                             Validatemsg = errormsg + "必须电话格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -129,7 +141,8 @@ $.fn.Validform = function () {
                         if (!isTelephoneOrNull(value)) {
                             Validatemsg = errormsg + "必须电话格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -138,7 +151,8 @@ $.fn.Validform = function () {
                         if (!isTelephoneOrNull(value)) {
                             Validatemsg = errormsg + "必须为传真格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -147,7 +161,8 @@ $.fn.Validform = function () {
                         if (!isMobile(value)) {
                             Validatemsg = errormsg + "必须为手机格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -156,7 +171,8 @@ $.fn.Validform = function () {
                         if (!isMobileOrnull(value)) {
                             Validatemsg = errormsg + "必须为手机格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -165,7 +181,8 @@ $.fn.Validform = function () {
                         if (!isMobileOrPhone(value)) {
                             Validatemsg = errormsg + "必须为电话格式或手机格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -174,7 +191,8 @@ $.fn.Validform = function () {
                         if (!isMobileOrPhoneOrNull(value)) {
                             Validatemsg = errormsg + "必须为电话格式或手机格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -183,7 +201,8 @@ $.fn.Validform = function () {
                         if (!isUri(value)) {
                             Validatemsg = errormsg + "必须为网址格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -192,7 +211,8 @@ $.fn.Validform = function () {
                         if (!isUriOrnull(value)) {
                             Validatemsg = errormsg + "必须为网址格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -201,7 +221,8 @@ $.fn.Validform = function () {
                         if (!isEqual(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "不相等！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -210,7 +231,8 @@ $.fn.Validform = function () {
                         if (!isDate(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为日期格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -219,7 +241,8 @@ $.fn.Validform = function () {
                         if (!isDateOrNull(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为日期格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -228,7 +251,8 @@ $.fn.Validform = function () {
                         if (!isDateTime(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为日期时间格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -237,7 +261,8 @@ $.fn.Validform = function () {
                         if (!isDateTimeOrNull(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为日期时间格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -246,7 +271,8 @@ $.fn.Validform = function () {
                         if (!isTime(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为时间格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -255,7 +281,8 @@ $.fn.Validform = function () {
                         if (!isTimeOrNull(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为时间格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -264,7 +291,8 @@ $.fn.Validform = function () {
                         if (!isChinese(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为中文！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -273,7 +301,8 @@ $.fn.Validform = function () {
                         if (!isChineseOrNull(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为中文！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -282,7 +311,8 @@ $.fn.Validform = function () {
                         if (!isZip(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为邮编格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -291,7 +321,8 @@ $.fn.Validform = function () {
                         if (!isZipOrNull(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为邮编格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -300,7 +331,8 @@ $.fn.Validform = function () {
                         if (!isDouble(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为小数！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -309,7 +341,8 @@ $.fn.Validform = function () {
                         if (!isDoubleOrNull(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为小数！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -318,7 +351,8 @@ $.fn.Validform = function () {
                         if (!isIDCard(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为身份证格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -327,7 +361,8 @@ $.fn.Validform = function () {
                         if (!isIDCardOrNull(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为身份证格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -336,7 +371,8 @@ $.fn.Validform = function () {
                         if (!isIP(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为IP格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -345,7 +381,8 @@ $.fn.Validform = function () {
                         if (!isIPOrNullOrNull(value, $(this).attr("eqvalue"))) {
                             Validatemsg = errormsg + "必须为IP格式！\n";
                             Validateflag = false;
-                            ValidationMessage($(this), Validatemsg); return false;
+                            layer.msg(Validatemsg);
+                            return false;
                         }
                         break;
                     }
@@ -795,42 +832,4 @@ $.fn.Validform = function () {
         }
         return false;
     }
-}
-//提示信息
-function ValidationMessage(obj, Validatemsg) {
-    try {
-        removeMessage(obj);
-        obj.focus();
-        var $poptip_error = $('<div class="poptip"><span class="poptip-arrow poptip-arrow-top"><em>◆</em></span>' + Validatemsg + '</div>').css("left", obj.offset().left + 'px').css("top", obj.offset().top + obj.parent().height() + 5 + 'px');
-        $('body').append($poptip_error);
-
-        if (obj.hasClass('form-control') || obj.hasClass('ui-select')) {
-            obj.parent().addClass('has-error');
-        }
-        if (obj.hasClass('ui-select')) {
-            $('.input-error').remove();
-        }
-        obj.change(function () {
-            if (obj.val()) {
-                removeMessage(obj);
-            }
-        });
-        if (obj.hasClass('ui-select')) {
-            $(document).click(function (e) {
-                if (obj.attr('data-value')) {
-                    removeMessage(obj);
-                }
-                e.stopPropagation();
-            });
-        }
-        return false;  
-    } catch (e) {
-        alert(e)
-    }
-}
-//移除提示
-function removeMessage(obj) {
-    obj.parent().removeClass('has-error');
-    $('.poptip').remove();
-    $('.input-error').remove();
 }

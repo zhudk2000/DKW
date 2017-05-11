@@ -67,5 +67,7 @@ namespace OpenAuth.Repository.Models
             modelBuilder.Configurations.Add(new WFSchemeContentMap());
             modelBuilder.Configurations.Add(new WFSchemeInfoMap());
         }
+
+        public System.Data.Entity.DbSet<OpenAuth.Domain.Business.OrderHeader> OrderHeaders { get; set; }
     }
 }

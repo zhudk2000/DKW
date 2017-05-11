@@ -83,18 +83,21 @@ namespace OpenAuth.Mvc.Controllers
         public ActionResult MenuHeader()
         {
             var sb = new StringBuilder();
-            foreach (var element in CurrentModule.Elements)
+            if (CurrentModule != null)
             {
-                sb.Append("<button "
-                          + " id='" + element.DomId + "' "
-                          + " class='btn btn-sm " + element.Class + "' "
-                          + " onclick='" + element.Script + "' " + element.Attr
-                          + ">");
-                if (!string.IsNullOrEmpty(element.Icon))
+                foreach (var element in CurrentModule.Elements)
                 {
-                    sb.Append("<i class='ace-icon fa fa-" + element.Icon + "'></i>");
+                    sb.Append("<button "
+                              + " id='" + element.DomId + "' "
+                              + " class='btn btn-sm " + element.Class + "' "
+                              + " onclick='" + element.Script + "' " + element.Attr
+                              + ">");
+                    if (!string.IsNullOrEmpty(element.Icon))
+                    {
+                        sb.Append("<i class='ace-icon fa fa-" + element.Icon + "'></i>");
+                    }
+                    sb.Append(element.Name + "</button>");
                 }
-                sb.Append(element.Name + "</button>");
             }
             ViewBag.Buttons = sb.ToString();
             return View();

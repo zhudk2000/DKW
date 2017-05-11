@@ -75,6 +75,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
@@ -159,6 +160,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModuleElementManagerController.cs" />
     <Compile Include="Controllers\ModuleManagerController.cs" />
+    <Compile Include="Controllers\OrderManagerController.cs" />
     <Compile Include="Controllers\OrgManagerController.cs" />
     <Compile Include="Controllers\RelevanceManagerController.cs" />
     <Compile Include="Controllers\ResourceManagerController.cs" />
@@ -181,6 +183,8 @@
   <ItemGroup>
     <Content Include="BllScripts\assignModule.js" />
     <Content Include="BllScripts\assignModuleElement.js" />
+    <Content Include="BllScripts\Business\layer_validator.js" />
+    <Content Include="BllScripts\Business\order_catch.js" />
     <Content Include="BllScripts\Business\user_register.js" />
     <Content Include="BllScripts\categoryManager.js" />
     <Content Include="BllScripts\customermanager.js" />
@@ -1212,6 +1216,7 @@
     <Content Include="Views\Shared\_FlowForm.cshtml" />
     <Content Include="Views\Shared\_Form.cshtml" />
     <Content Include="Views\Login\UserRegister.cshtml" />
+    <Content Include="Views\OrderManager\OrderCatch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
