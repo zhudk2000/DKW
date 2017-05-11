@@ -24,6 +24,7 @@
                         layer.close(tempObj);
                         var tmp = getWebserviceStr("/OrderManager/GetNextOrderNumber", {});
                         $("#lblOrderID").text(tmp);
+
                         $("#lblCustName").text(vm.$data.Customer_name);
                         $("#lblServiceItem").text(vm.$data.Service_item);
                         $("#lblQuantity").text(vm.$data.Quantity);
@@ -34,6 +35,13 @@
 
                         var ttl = vm.$data.Unit_price * vm.$data.Quantity;
                         $("#lblTotalAmount").text(ttl);
+                        vm.$data.Amount = ttl;
+
+                        $.post("/OrderManager/SaveOrderCatch", vm.$data, function (data) {
+                            layer.msg(data.Message);
+                            if (data.Status) {
+                            }
+                        }, "json");
 
                         $("#divOrderCatch").hide();
                         $("#divOrderCatchPreview").show();
@@ -41,6 +49,11 @@
                 );
             }
         });
+
+        $("#btnPrint").click(function () {
+            doPrintDiv("divPrintArea");
+        });
+
     }
 );
 

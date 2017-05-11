@@ -45,7 +45,7 @@ namespace OpenAuth.App.SSO
                         Password = ""
                     };
                 }
-                else
+                else if (model.UserName != "System")
                 {
                     var usermanager = (UserManagerApp)DependencyResolver.Current.GetService(typeof(UserManagerApp));
                     userInfo = usermanager.Get(model.UserName);

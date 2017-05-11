@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label no-padding-right" for=""> 送箱地址 </label>
                                     <div class="col-sm-10">
-                                        <input type="text" isvalid="yes" checkexpession="NotNull" errormsg="送箱地址" class="input-xxlarge" id="Contact_address" v-model="Contact_address" placeholder="请输入送箱地址" maxlength="10" />
+                                        <input type="text" isvalid="yes" checkexpession="NotNull" errormsg="送箱地址" class="input-xxlarge" id="Contact_address" v-model="Contact_address" placeholder="请输入送箱地址" maxlength="100" />
                                     </div>
                                 </div>
 
@@ -68,6 +68,7 @@
                                     <input type="hidden" id="Customer_id" v-model="Customer_id" />
                                     <input type="hidden" id="Customer_name" v-model="Customer_name" />
                                     <input type="hidden" id="User_ID" v-model="User_ID" />
+                                    <input type="hidden" id="Amount" v-model="Amount" />
                                 </div>
 
                                 <div class="form-group"><label class="col-sm-1 control-label no-padding-right bolder"> 温馨提示 </label></div>
@@ -90,45 +91,53 @@
             </div>
         
             <div class="col-md-12" id="divOrderCatchPreview" style="display:none;">
-                <div class="col-md-12 row">
-                    <label class="col-md-12 text-center bigger-150 bolder">订&nbsp;&nbsp;单</label>
-                </div>
-                <div class="col-md-12 row header">
-                    <label class="col-md-6 text-right">订单号：</label>
-                    <label class="col-md-6 text-left" id="lblOrderID"></label>
+                <div id="divPrintArea">
+                    <div class="col-md-12 row">
+                        <label class="col-md-12 text-center bigger-150 bolder">订&nbsp;&nbsp;单</label>
+                    </div>
+                    <div class="col-md-12 row header">
+                        <label class="col-md-6 text-right">订单号：</label>
+                        <label class="col-md-6 text-left" id="lblOrderID"></label>
+                    </div>
+
+                    <div class="col-md-12 row">
+                        <label class="col-md-6 text-right">单位名称：</label>
+                        <label class="col-md-6 text-left" id="lblCustName"></label>
+                    </div>
+                    <div class="col-md-12 row">
+                        <label class="col-md-6 text-right">服务项目：</label>
+                        <label class="col-md-6 text-left" id="lblServiceItem"></label>
+                    </div>
+                    <div class="col-md-12 row">
+                        <label class="col-md-6 text-right">存储箱数：</label>
+                        <label class="col-md-6 text-left" id="lblQuantity">箱</label>
+                    </div>
+                    <div class="col-md-12 row">
+                        <label class="col-md-6 text-right">联系人：</label>
+                        <label class="col-md-6 text-left" id="lblContact"></label>
+                    </div>
+                    <div class="col-md-12 row">
+                        <label class="col-md-6 text-right">手机号码：</label>
+                        <label class="col-md-6 text-left" id="lblContactMob"></label>
+                    </div>
+                    <div class="col-md-12 row">
+                        <label class="col-md-6 text-right">送箱地址：</label>
+                        <label class="col-md-6 text-left" id="lblAddress"></label>
+                    </div>
+                    <div class="col-md-12 row">
+                        <label class="col-md-6 text-right">存储单价：</label>
+                        <label class="col-md-6 text-left" id="lblUnitPrice">5</label>
+                    </div>
+
+                    <div class="col-md-12 row">
+                        <label class="col-md-12 text-center bigger-150 bolder">合计金额&nbsp;&nbsp;&nbsp;<span id="lblTotalAmount"></span>元/月</label>
+                    </div>
                 </div>
 
-                <div class="col-md-12 row">
-                    <label class="col-md-6 text-right">单位名称：</label>
-                    <label class="col-md-6 text-left" id="lblCustName"></label>
-                </div>
-                <div class="col-md-12 row">
-                    <label class="col-md-6 text-right">服务项目：</label>
-                    <label class="col-md-6 text-left" id="lblServiceItem"></label>
-                </div>
-                <div class="col-md-12 row">
-                    <label class="col-md-6 text-right">存储箱数：</label>
-                    <label class="col-md-6 text-left" id="lblQuantity">箱</label>
-                </div>
-                <div class="col-md-12 row">
-                    <label class="col-md-6 text-right">联系人：</label>
-                    <label class="col-md-6 text-left" id="lblContact"></label>
-                </div>
-                <div class="col-md-12 row">
-                    <label class="col-md-6 text-right">手机号码：</label>
-                    <label class="col-md-6 text-left" id="lblContactMob"></label>
-                </div>
-                <div class="col-md-12 row">
-                    <label class="col-md-6 text-right">送箱地址：</label>
-                    <label class="col-md-6 text-left" id="lblAddress"></label>
-                </div>
-                <div class="col-md-12 row">
-                    <label class="col-md-6 text-right">存储单价：</label>
-                    <label class="col-md-6 text-left" id="lblUnitPrice">5</label>
-                </div>
-
-                <div class="col-md-12 row">
-                    <label class="col-md-12 text-center bigger-150 bolder">合计金额&nbsp;&nbsp;&nbsp;<span id="lblTotalAmount"></span>元/月</label>
+                <div class="form-group">
+                    <div class="col-sm-2 col-sm-offset-4 text-center">
+                        <input type="button" class="btn-danger" value="订单打印" id="btnPrint" />
+                    </div>
                 </div>
             </div>
     </div><!-- /.page-content -->

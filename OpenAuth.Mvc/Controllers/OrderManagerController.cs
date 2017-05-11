@@ -89,5 +89,21 @@ namespace OpenAuth.Mvc.Controllers
             return JsonHelper.Instance.Serialize(result);
         }
         
+        [HttpPost]
+        public string SaveOrderCatch(OrderCatchVM view)
+        {
+            Infrastructure.Response result = new Infrastructure.Response();
+            try
+            {
+                _app.SaveOrderCatch(view);
+                result.Message = "保存成功！";
+            }
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = ex.Message;
+            }
+            return JsonHelper.Instance.Serialize(result);
+        }
     }
 }

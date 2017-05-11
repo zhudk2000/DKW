@@ -22,7 +22,8 @@ function execute_xml(url, callback, data, type, async) {
         dataType: "json",
         success: callback,
         error: function (result, status, a) {
-            alert(status + "ERROR: " + result.responseText);
+            //alert(status + "ERROR: " + result.responseText);
+            alert("系统错误，请联系管理员！: " + result.responseText);
         }
     });
 }
@@ -131,6 +132,17 @@ Date.prototype.Format2String = function (fmt) {
     return fmt;
 }
 
+function doPrintDiv(divID) {
 
+    var strHTML = $("#" + divID).html();
+    if (strHTML && (strHTML != "")) {
+        var newWindow = window.open("");
+        newWindow.document.write("<html><head>");
+        newWindow.document.write("</head><body><br><br>");
+        newWindow.document.write(strHTML);
+        newWindow.document.write("</body></html>");
+        newWindow.print();
+    }
+}
 
 
