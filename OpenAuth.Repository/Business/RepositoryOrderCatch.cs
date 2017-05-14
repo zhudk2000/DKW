@@ -92,7 +92,8 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
 
                 cmd.ExecuteNonQuery();
 
-                foreach (OrderDetail od in view.orderDetail) {
+                foreach (OrderDetail od in view.orderDetail)
+                {
                     cmd.Parameters.Clear();
                     cmd.CommandText = sqlD;
 
@@ -112,7 +113,8 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
 
                 dt.Commit();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 if (dt != null) dt.Rollback();
                 throw;
             }
@@ -121,6 +123,94 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
                 if (dt != null) dt.Dispose();
                 cmd.Dispose();
             }
+        }
+
+        public int GetCount()
+        {
+            return 100;
+        }
+
+        public List<OrderHeader> LoadOrder(int pageindex, int pagesize)
+        {
+            List<OrderHeader> result = new List<OrderHeader>();
+            DbCommand cmd = base.GetDbCommandObject();
+            string sql = @"select * from order_head order by order_id";
+            cmd.CommandText = sql;
+            try
+            {
+                if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
+                DbDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    OrderHeader oh = new OrderHeader();
+                    oh.Order_id = dr["order_id"].ToString();
+                    oh.Customer_id = dr["customer_id"].ToString();
+                    oh.Customer_name = dr["customer_name"].ToString();
+                    oh.Contacts = dr["contacts"].ToString();
+                    oh.Contact_tel = dr["contact_tel"].ToString();
+                    oh.Contact_address = dr["contact_address"].ToString();
+                    oh.Order_date = DateTime.Parse(dr["order_date"].ToString());
+                    oh.Contract_id = dr["contract_id"].ToString();
+                    oh.Sales_name = dr["sales_name"].ToString();
+                    // deliver_date, pick_date, order_status, AR_STATUS, Remark
+                    result.Add(oh);
+                }
+            }
+            catch (Exception e) { }
+            finally
+            {
+                cmd.Dispose();
+            }
+
+            return result;
+        }
+
+        public List<OrderHeader> LoadOrder(string ccd, string cnm, int page = 1, int rows = 30)
+        {
+            List<OrderHeader> result = new List<OrderHeader>();
+
+            DBUtility db = new DBUtility();
+            DbCommand cmd = base.GetDbCommandObject();
+            string sql = @"select * from order_head where 1 = 1 ";
+            if (ccd != "")
+            {
+                sql += " and customer_id = @ccd";
+                db.NewParaWithValue("ccd", DbType.String, ccd, ref cmd);
+            }
+            if (cnm != "")
+            {
+                sql += " and customer_name like @cnm";
+                db.NewParaWithValue("cnm", DbType.String, "%" + cnm + "%", ref cmd);
+            }
+            sql += " order by order_id";
+            cmd.CommandText = sql;
+            try
+            {
+                if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
+                DbDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    OrderHeader oh = new OrderHeader();
+                    oh.Order_id = dr["order_id"].ToString();
+                    oh.Customer_id = dr["customer_id"].ToString();
+                    oh.Customer_name = dr["customer_name"].ToString();
+                    oh.Contacts = dr["contacts"].ToString();
+                    oh.Contact_tel = dr["contact_tel"].ToString();
+                    oh.Contact_address = dr["contact_address"].ToString();
+                    oh.Order_date = DateTime.Parse(dr["order_date"].ToString());
+                    oh.Contract_id = dr["contract_id"].ToString();
+                    oh.Sales_name = dr["sales_name"].ToString();
+                    // deliver_date, pick_date, order_status, AR_STATUS, Remark
+                    result.Add(oh);
+                }
+            }
+            catch (Exception e) { }
+            finally
+            {
+                cmd.Dispose();
+            }
+
+            return result;
         }
     }
 }

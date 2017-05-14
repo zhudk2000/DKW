@@ -39,6 +39,11 @@ namespace OpenAuth.Mvc.Controllers
             return View();
         }
 
+        public ActionResult OrderApprove()
+        {
+            return View();
+        }
+
         [HttpPost]
         public string GetUserInfo()
         {
@@ -104,6 +109,16 @@ namespace OpenAuth.Mvc.Controllers
                 result.Message = ex.Message;
             }
             return JsonHelper.Instance.Serialize(result);
+        }
+
+        public string Load(int page = 1, int rows = 30)
+        {
+            return JsonHelper.Instance.Serialize(_app.Load(page, rows));
+        }
+
+        public string Query(string ccd, string cnm, int page = 1, int rows = 30)
+        {
+            return JsonHelper.Instance.Serialize(_app.Load(ccd, cnm, page, rows));
         }
     }
 }

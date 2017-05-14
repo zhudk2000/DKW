@@ -69,5 +69,39 @@ namespace OpenAuth.App.Business
 
             _repo.SaveOrderCatch(oh);
         }
+
+        public GridData Load(int pageindex, int pagesize)
+        {
+            if (pageindex < 1) pageindex = 1;  //TODO:如果列表为空新增加一个用户后，前端会传一个0过来，奇怪？？
+            IEnumerable<OrderHeader> ords;
+            int records = _repo.GetCount();
+
+            ords = _repo.LoadOrder(pageindex, pagesize);
+
+            return new GridData
+            {
+                records = records,
+                total = (int)Math.Ceiling((double)records / pagesize),
+                rows = ords,
+                page = pageindex
+            };
+        }
+
+        public GridData Load(string ccd, string cnm, int pageindex, int pagesize)
+        {
+            if (pageindex < 1) pageindex = 1;  //TODO:如果列表为空新增加一个用户后，前端会传一个0过来，奇怪？？
+            IEnumerable<OrderHeader> ords;
+            int records = _repo.GetCount();
+
+            ords = _repo.LoadOrder(ccd, cnm, pageindex, pagesize);
+
+            return new GridData
+            {
+                records = records,
+                total = (int)Math.Ceiling((double)records / pagesize),
+                rows = ords,
+                page = pageindex
+            };
+        }
     }
 }
