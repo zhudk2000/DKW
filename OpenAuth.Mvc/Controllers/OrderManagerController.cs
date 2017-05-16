@@ -116,9 +116,9 @@ namespace OpenAuth.Mvc.Controllers
             return JsonHelper.Instance.Serialize(_app.Load(page, rows));
         }
 
-        public string Query(string ccd, string cnm, int page = 1, int rows = 30)
+        public string Query(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int page = 1, int rows = 30)
         {
-            return JsonHelper.Instance.Serialize(_app.Load(ccd, cnm, page, rows));
+            return JsonHelper.Instance.Serialize(_app.Load(dteFrom, dteTo, ordNO, cnm, ordStatus, page, rows));
         }
     }
 }

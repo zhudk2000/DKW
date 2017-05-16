@@ -87,13 +87,13 @@ namespace OpenAuth.App.Business
             };
         }
 
-        public GridData Load(string ccd, string cnm, int pageindex, int pagesize)
+        public GridData Load(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int pageindex = 1, int pagesize = 30)
         {
             if (pageindex < 1) pageindex = 1;  //TODO:如果列表为空新增加一个用户后，前端会传一个0过来，奇怪？？
             IEnumerable<OrderHeader> ords;
             int records = _repo.GetCount();
 
-            ords = _repo.LoadOrder(ccd, cnm, pageindex, pagesize);
+            ords = _repo.LoadOrder(dteFrom, dteTo, ordNO, cnm, ordStatus, pageindex, pagesize);
 
             return new GridData
             {

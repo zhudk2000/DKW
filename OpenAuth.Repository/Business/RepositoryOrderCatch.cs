@@ -127,7 +127,21 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
 
         public int GetCount()
         {
-            return 100;
+            int result = 0;
+            DbCommand cmd = base.GetDbCommandObject();
+            string sql = @"select count(*) from order_head order by order_id";
+            cmd.CommandText = sql;
+            try
+            {
+                if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
+                result = int.Parse(cmd.ExecuteScalar().ToString());
+            }
+            catch (Exception e) { }
+            finally
+            {
+                cmd.Dispose();
+            }
+            return result;
         }
 
         public List<OrderHeader> LoadOrder(int pageindex, int pagesize)
@@ -165,25 +179,65 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
             return result;
         }
 
-        public List<OrderHeader> LoadOrder(string ccd, string cnm, int page = 1, int rows = 30)
+        private DbCommand getQueryCommand(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus)
         {
-            List<OrderHeader> result = new List<OrderHeader>();
-
             DBUtility db = new DBUtility();
             DbCommand cmd = base.GetDbCommandObject();
-            string sql = @"select * from order_head where 1 = 1 ";
-            if (ccd != "")
+            cmd.Parameters.Clear();
+            string sql = @"select ROW_NUMBER() over(order by order_id) as seq, a.* from order_head a where 1 = 1 ";
+            if (dteFrom != "")
             {
-                sql += " and customer_id = @ccd";
-                db.NewParaWithValue("ccd", DbType.String, ccd, ref cmd);
+                sql += " and order_date >= @dteFrom";
+                db.NewParaWithValue("dteFrom", DbType.String, dteFrom, ref cmd);
+            }
+            if (dteTo != "")
+            {
+                sql += " and order_date <= @dteTo + ' 23:59:59'";
+                db.NewParaWithValue("dteTo", DbType.String, dteTo, ref cmd);
+            }
+            if (ordNO != "")
+            {
+                sql += " and order_id like @ordNO";
+                db.NewParaWithValue("ordNO", DbType.String, "%" + ordNO + "%", ref cmd);
             }
             if (cnm != "")
             {
                 sql += " and customer_name like @cnm";
                 db.NewParaWithValue("cnm", DbType.String, "%" + cnm + "%", ref cmd);
             }
-            sql += " order by order_id";
+            //
+            if (cnm != "")
+            {
+                sql += " and order_status = @ordStatus";
+                db.NewParaWithValue("ordStatus", DbType.String, ordStatus, ref cmd);
+            }
             cmd.CommandText = sql;
+
+            return cmd;
+        }
+
+        public int GetCount(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int page = 1, int rows = 30)
+        {
+            int result = 0;
+
+            DbCommand cmd = getQueryCommand(dteFrom, dteTo, ordNO, cnm, ordStatus);
+            cmd.CommandText = "select count(*) from (" + cmd.CommandText + ") a";
+            try
+            {
+                if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
+                result = int.Parse(cmd.ExecuteScalar().ToString());
+            }
+            catch (Exception e) { throw; }
+            finally { cmd.Dispose(); }
+
+            return result;
+        }
+
+        public List<OrderHeader> LoadOrder(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int page = 1, int rows = 30)
+        {
+            List<OrderHeader> result = new List<OrderHeader>();
+            DbCommand cmd = getQueryCommand(dteFrom, dteTo, ordNO, cnm, ordStatus);
+            cmd.CommandText = "select * from (" + cmd.CommandText + ") tmp1 where seq > " + rows * (page - 1) + " and seq <= " + rows * page;
             try
             {
                 if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
@@ -200,11 +254,18 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
                     oh.Order_date = DateTime.Parse(dr["order_date"].ToString());
                     oh.Contract_id = dr["contract_id"].ToString();
                     oh.Sales_name = dr["sales_name"].ToString();
-                    // deliver_date, pick_date, order_status, AR_STATUS, Remark
+                    if (dr["deliver_date"].ToString() != "")
+                        oh.Deliver_date = DateTime.Parse(dr["deliver_date"].ToString());
+                    if (dr["pick_date"].ToString() != "")
+                        oh.Pick_date = DateTime.Parse(dr["pick_date"].ToString());
+                    oh.Order_status = dr["order_status"].ToString();
+                    oh.Ar_Status = dr["AR_STATUS"].ToString();
+                    oh.Remark = dr["Remark"].ToString();
+
                     result.Add(oh);
                 }
             }
-            catch (Exception e) { }
+            catch (Exception e) { throw; }
             finally
             {
                 cmd.Dispose();

@@ -25,12 +25,23 @@
                         <div class="widget-main">
                             <form class="form-inline">
                                 <div class="form-group">
-                                    <label>&nbsp;客户代码:</label>
-                                    <input type="text" class="form-control" id="qryCustomerCode" maxlength="30" placeholder="请输入" />
+                                    <label>&nbsp;订单日期:从</label>
+                                    <input type="date" class="form-control" id="qryDateFrom" maxlength="30" placeholder="请输入" />
+                                    <label>到</label>
+                                    <input type="date" class="form-control" id="qryDateTo" maxlength="30" placeholder="请输入" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>&nbsp;订单号:</label>
+                                    <input type="text" class="form-control" style="width:80px;" id="qryOrderID" maxlength="30" placeholder="请输入" />
                                 </div>
                                 <div class="form-group">
-                                    <label>&nbsp;客户名称: </label>
-                                    <input type="text" class="form-control" id="qryCustomerName" maxlength="30" />
+                                    <label>&nbsp;客户名称:</label>
+                                    <input type="text" class="form-control" style="width:120px;" id="qryCustomerName" maxlength="30" />
+                                </div>
+                                <div class="form-group">
+                                    <label>&nbsp;状态:</label>
+                                    <input type="text" class="form-control" style="width:80px;" id="qryOrderStatus" maxlength="30" placeholder="请输入" />
                                 </div>
                                 <button id="btnQuery" class="btn-primary">查 询</button>
                             </form>
@@ -57,3 +68,4 @@
 <script src="~/Content/scripts/utils/ui.js"></script>
 <script src="~/Content/scripts/dist/js/bootstrap-select.js"></script>
 <link href="~/Content/scripts/dist/css/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Content/scripts/plugins/datepicker/DatePicker.js"></script>

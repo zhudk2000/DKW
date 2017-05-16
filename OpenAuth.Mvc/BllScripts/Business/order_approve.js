@@ -11,9 +11,14 @@ function MainGrid() {
                     label: '订单号'
                 },
                 {
+                    index: 'Order_date',
+                    name: 'Order_date',
+                    label: '创建时间'
+                },
+                {
                     index: 'Customer_id',
                     name: 'Customer_id',
-                    label: '客户代码'
+                    label: '客户编号'
                 },
                 {
                     index: 'Customer_name',
@@ -26,11 +31,20 @@ function MainGrid() {
                     label: '客户地址'
                 },
                 {
-                    index: 'Order_date',
-                    name: 'Order_date',
-                    label: '订单日期'
+                    index: 'Contacts',
+                    name: 'Contacts',
+                    label: '联系人'
+                },
+                {
+                    index: 'Contact_tel',
+                    name: 'Contact_tel',
+                    label: '联系电话'
+                },
+                {
+                    index: 'Contract_id',
+                    name: 'Contract_id',
+                    label: '合同编号'
                 }
-                //, , , contacts, contact_tel, , order_date, contract_id, sales_name, deliver_date, pick_date, order_status, AR_STATUS, Remark
             ],
             url: url,
             datatype: "json",
@@ -57,7 +71,11 @@ function MainGrid() {
     this.reload = function () {
         this.maingrid.jqGrid("setGridParam", {
             url: "/OrderManager/Query",
-            postData: { ccd: $("#qryCustomerCode").val(), cnm: $("#qryCustomerName").val(), page: 1, rows: 30 }
+            postData: {
+                dteFrom: $("#qryDateFrom").val(), dteTo: $("#qryDateTo").val(),
+                ordNO: $("#qryOrderID").val(), cnm: $("#qryCustomerName").val(),
+                ordStatus: $("#qryOrderStatus").val(), page: 1, rows: 30
+            }
         }).trigger("reloadGrid", [{ page: 1 }]);  //重载JQGrid
 
     };
@@ -84,6 +102,7 @@ $(function () {
 
     $("#btnQuery").on("click", function () {
         //$.post()
+        //alert($("#qryDateFrom").val());
         list.reload();
         return false;
         //$.post("/CustomerManager/Query", { ccd: $("#qryCustomerCode").val, cnm: $("#qryCustomerName").val });
