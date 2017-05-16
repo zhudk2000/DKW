@@ -44,13 +44,23 @@ function MainGrid() {
                     index: 'Contract_id',
                     name: 'Contract_id',
                     label: '合同编号'
+                },
+                {
+                    index: 'Order_status',
+                    name: 'Order_status',
+                    hidden: true
+                },
+                {
+                    index: 'act',
+                    name: 'act',
+                    label: '操作'
                 }
             ],
             url: url,
             datatype: "json",
 
             viewrecords: true,
-            rowNum: 18,
+            rowNum: 30,
             pager: "#grid-pager",
             altRows: true,
             height: 'auto',
@@ -61,9 +71,24 @@ function MainGrid() {
                 var table = this;
                 setTimeout(function () {
                     updatePagerIcons(table);
-                },
-                    0);
+                },0);
+            },
+            gridComplete: function () {
+                var ids = $("#maingrid").jqGrid('getDataIDs');
+                for (var i = 0; i < ids.length; i++) {
+                    var c = ids[i];
+                    var s = "客服<a href='#' onclick=\"approve('" + c + "');\">未确认</a>";
+                    var status = $("#maingrid").jqGrid('getCell', c, "Order_status");
+                    if ((status) && (status == "1")) {
+                        s = "已确认<a href='#' onclick=\"boss_approve('" + c + "');\">未审核</a>";
+                    } else if ((status) && (status == "9")) {
+                        s = "已审核";
+                    }
+                    
+                    $("#maingrid").jqGrid('setRowData', ids[i], { act: s });
+                }
             }
+
         }).jqGrid('navGrid', "#grid-pager", {
             edit: false, add: false, del: false, refresh: false, search: false
         });
@@ -98,6 +123,14 @@ function setComboValues() {
     });
 }
 
+function approve(idx) {
+    alert("approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
+}
+
+function boss_approve(idx) {
+    alert("boss_approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
+}
+
 $(function () {
 
     $("#btnQuery").on("click", function () {
@@ -107,6 +140,5 @@ $(function () {
         return false;
         //$.post("/CustomerManager/Query", { ccd: $("#qryCustomerCode").val, cnm: $("#qryCustomerName").val });
     });
-    //setComboValues();
-    //form.render('select');
+
 });

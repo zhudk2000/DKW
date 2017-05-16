@@ -91,7 +91,7 @@ namespace OpenAuth.App.Business
         {
             if (pageindex < 1) pageindex = 1;  //TODO:如果列表为空新增加一个用户后，前端会传一个0过来，奇怪？？
             IEnumerable<OrderHeader> ords;
-            int records = _repo.GetCount();
+            int records = _repo.GetCount(dteFrom, dteTo, ordNO, cnm, ordStatus, pageindex, pagesize);
 
             ords = _repo.LoadOrder(dteFrom, dteTo, ordNO, cnm, ordStatus, pageindex, pagesize);
 

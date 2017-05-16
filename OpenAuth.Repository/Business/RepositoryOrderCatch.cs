@@ -166,7 +166,13 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
                     oh.Order_date = DateTime.Parse(dr["order_date"].ToString());
                     oh.Contract_id = dr["contract_id"].ToString();
                     oh.Sales_name = dr["sales_name"].ToString();
-                    // deliver_date, pick_date, order_status, AR_STATUS, Remark
+                    if (dr["deliver_date"].ToString() != "")
+                        oh.Deliver_date = DateTime.Parse(dr["deliver_date"].ToString());
+                    if (dr["pick_date"].ToString() != "")
+                        oh.Pick_date = DateTime.Parse(dr["pick_date"].ToString());
+                    oh.Order_status = dr["order_status"].ToString() == "" ? "0" : dr["order_status"].ToString();
+                    oh.Ar_Status = dr["AR_STATUS"].ToString();
+                    oh.Remark = dr["Remark"].ToString();
                     result.Add(oh);
                 }
             }
@@ -258,7 +264,7 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
                         oh.Deliver_date = DateTime.Parse(dr["deliver_date"].ToString());
                     if (dr["pick_date"].ToString() != "")
                         oh.Pick_date = DateTime.Parse(dr["pick_date"].ToString());
-                    oh.Order_status = dr["order_status"].ToString();
+                    oh.Order_status = dr["order_status"].ToString() == "" ? "0" : dr["order_status"].ToString();
                     oh.Ar_Status = dr["AR_STATUS"].ToString();
                     oh.Remark = dr["Remark"].ToString();
 
