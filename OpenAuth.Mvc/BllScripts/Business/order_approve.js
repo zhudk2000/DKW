@@ -41,9 +41,14 @@ function MainGrid() {
                     label: '联系电话'
                 },
                 {
-                    index: 'Contract_id',
-                    name: 'Contract_id',
-                    label: '合同编号'
+                    index: 'Amount',
+                    name: 'Amount',
+                    label: '存储费'
+                },
+                {
+                    index: 'Quantity',
+                    name: 'Quantity',
+                    label: '箱数'
                 },
                 {
                     index: 'Order_status',

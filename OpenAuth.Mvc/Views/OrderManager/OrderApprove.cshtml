@@ -41,7 +41,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label>&nbsp;状态:</label>
-                                    <input type="text" class="form-control" style="width:80px;" id="qryOrderStatus" maxlength="30" placeholder="请输入" />
+                                    @*<input type="text" class="form-control" style="width:80px;" id="qryOrderStatus" maxlength="30" placeholder="请输入" />*@
+                                    <select id="qryOrderStatus" class="form-control" style="width:80px;">
+                                        <option value="">全部</option>
+                                        <option value="0">未确认</option>
+                                        <option value="1">待审核</option>
+                                        <option value="2">已审核</option>
+                                    </select>
                                 </div>
                                 <button id="btnQuery" class="btn-primary">查 询</button>
                             </form>

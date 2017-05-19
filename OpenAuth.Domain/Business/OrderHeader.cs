@@ -25,6 +25,9 @@ namespace OpenAuth.Domain.Business
             string Order_status = string.Empty;
             string Ar_Status = string.Empty;
             string Remark = string.Empty;
+
+            float Amount = 0;
+            int Quantity = 0;
         }
 
         public List<OrderDetail> orderDetail { get; set; }
@@ -42,6 +45,9 @@ namespace OpenAuth.Domain.Business
         public string Order_status { get; set; }
         public string Ar_Status { get; set; }
         public string Remark { get; set; }
+
+        public float Amount { get; set; }
+        public int Quantity { get; set; }
     }
     
 }

@@ -144,11 +144,27 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
             return result;
         }
 
+        private string getOrderQueryString()
+        {
+            return @"
+	select h.order_id, h.customer_id, h.customer_name, h.contacts, h.contact_tel, 
+		h.contact_address, h.order_date, h.contract_id, h.sales_name, 
+		h.deliver_date, h.pick_date, h.order_status, h.AR_STATUS, h.Remark,
+		sum(d.amount) amount, sum(d.unit_quantity) qty
+	from order_head h, order_details d 
+	where h.order_id = d.order_id 
+	group by h.order_id, h.customer_id, h.customer_name, h.contacts, h.contact_tel, 
+		h.contact_address, h.order_date, h.contract_id, h.sales_name, 
+		h.deliver_date, h.pick_date, h.order_status, h.AR_STATUS, h.Remark
+";
+        }
+
         public List<OrderHeader> LoadOrder(int pageindex, int pagesize)
         {
             List<OrderHeader> result = new List<OrderHeader>();
             DbCommand cmd = base.GetDbCommandObject();
-            string sql = @"select * from order_head order by order_id";
+            string sql = getOrderQueryString() + @"
+    order by h.order_id";
             cmd.CommandText = sql;
             try
             {
@@ -173,6 +189,8 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
                     oh.Order_status = dr["order_status"].ToString() == "" ? "0" : dr["order_status"].ToString();
                     oh.Ar_Status = dr["AR_STATUS"].ToString();
                     oh.Remark = dr["Remark"].ToString();
+                    oh.Amount = float.Parse(dr["amount"].ToString());
+                    oh.Quantity = int.Parse(dr["qty"].ToString());
                     result.Add(oh);
                 }
             }
@@ -190,7 +208,12 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
             DBUtility db = new DBUtility();
             DbCommand cmd = base.GetDbCommandObject();
             cmd.Parameters.Clear();
-            string sql = @"select ROW_NUMBER() over(order by order_id) as seq, a.* from order_head a where 1 = 1 ";
+            string sql =
+@"select ROW_NUMBER() over(order by order_id) as seq, a.* 
+from (
+" + getOrderQueryString() + @"
+) a 
+where 1 = 1 ";
             if (dteFrom != "")
             {
                 sql += " and order_date >= @dteFrom";
@@ -212,7 +235,7 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
                 db.NewParaWithValue("cnm", DbType.String, "%" + cnm + "%", ref cmd);
             }
             //
-            if (cnm != "")
+            if (ordStatus != "")
             {
                 sql += " and order_status = @ordStatus";
                 db.NewParaWithValue("ordStatus", DbType.String, ordStatus, ref cmd);
@@ -267,6 +290,8 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
                     oh.Order_status = dr["order_status"].ToString() == "" ? "0" : dr["order_status"].ToString();
                     oh.Ar_Status = dr["AR_STATUS"].ToString();
                     oh.Remark = dr["Remark"].ToString();
+                    oh.Amount = float.Parse(dr["amount"].ToString());
+                    oh.Quantity = int.Parse(dr["qty"].ToString());
 
                     result.Add(oh);
                 }
@@ -279,5 +304,7 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
 
             return result;
         }
+
+
     }
 }
