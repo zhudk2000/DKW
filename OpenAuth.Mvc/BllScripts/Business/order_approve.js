@@ -167,9 +167,10 @@ function boss_approve(idx) {
 }
 
 $(function () {
-
+    if ($("#hidAction").val() == "approve")
+        $("#a_title01").text("订单确认");
     $("#btnQuery").on("click", function () {
-        alert($("#hidAction").val());
+        //alert($("#hidAction").val());
         //$.post()
         //alert($("#qryDateFrom").val());
         list.reload();
