@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Form.cshtml";
+}
+<!-- #section:basics/content.breadcrumbs -->
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#" id="a_title01">我的订单</a>
+        </li>
+        <li class="active">列表</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<!-- /section:basics/content.breadcrumbs -->
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="widget-box widget-color-blue">
+                    <div class="widget-header">
+                        @Html.Action("MenuHeader", "Home")
+                    </div>
+                    <div class="widget-body gridwidth">
+                        <div class="widget-main">
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label>&nbsp;订单日期:从</label>
+                                    @*<input type="date" class="form-control" id="qryDateFrom" maxlength="30" placeholder="请输入" />*@
+                                    <input id="qryDateFrom" style="width:120px;" class="layui-input" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
+                                    <label>到</label>
+                                    @*<input type="date" class="form-control" id="qryDateTo" maxlength="30" placeholder="请输入" />*@
+                                    <input id="qryDateTo" style="width:120px;" class="layui-input" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
+                                    <input type="hidden" id="qryCustomerID" value='@ViewData["CustomerID"]' />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>&nbsp;订单号:</label>
+                                    <input type="text" class="form-control" style="width:80px;" id="qryOrderID" maxlength="30" placeholder="请输入" />
+                                </div>
+                                <div class="form-group">
+                                    <label>&nbsp;状态:</label>
+                                    @*<input type="text" class="form-control" style="width:80px;" id="qryOrderStatus" maxlength="30" placeholder="请输入" />*@
+                                    <select id="qryOrderStatus" class="form-control" style="width:80px;">
+                                        <option value="">全部</option>
+                                        <option value="0">未确认</option>
+                                        <option value="1">待审核</option>
+                                        <option value="2">已审核</option>
+                                    </select>
+                                </div>
+                                <button id="btnQuery" class="btn-primary">查 询</button>
+
+                            </form>
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <table id="maingrid"></table>
+                                    <div id="grid-pager"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.page-content -->
+<!--编辑对话框-->
+
+
+<script src="~/Content/scripts/zTree/js/jquery.ztree.excheck.js"></script>
+<script src="~/BllScripts/grid.js"></script>
+<script src="~/BllScripts/parentTreeMultiple.js"></script>
+<script src="~/BllScripts/Business/my_orders.js"></script>
+<script src="~/BllScripts/jqEvent.js"></script>
+<script src="~/Content/scripts/utils/ui.js"></script>
+<script src="~/Content/scripts/dist/js/bootstrap-select.js"></script>
+<link href="~/Content/scripts/dist/css/bootstrap-select.css" rel="stylesheet" />
+@*<script src="~/Content/scripts/plugins/datepicker/DatePicker.js"></script>*@
+<script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+    });
+</script>

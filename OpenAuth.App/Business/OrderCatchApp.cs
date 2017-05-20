@@ -70,13 +70,13 @@ namespace OpenAuth.App.Business
             _repo.SaveOrderCatch(oh);
         }
 
-        public GridData Load(int pageindex, int pagesize)
+        public GridData Load(int pageindex, int pagesize, string cid = "")
         {
             if (pageindex < 1) pageindex = 1;  //TODO:如果列表为空新增加一个用户后，前端会传一个0过来，奇怪？？
             IEnumerable<OrderHeader> ords;
-            int records = _repo.GetCount();
+            int records = _repo.GetCount(cid);
 
-            ords = _repo.LoadOrder(pageindex, pagesize);
+            ords = _repo.LoadOrder(pageindex, pagesize, cid);
 
             return new GridData
             {
@@ -87,13 +87,13 @@ namespace OpenAuth.App.Business
             };
         }
 
-        public GridData Load(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int pageindex = 1, int pagesize = 30)
+        public GridData Load(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int pageindex = 1, int pagesize = 30, string cid = "")
         {
             if (pageindex < 1) pageindex = 1;  //TODO:如果列表为空新增加一个用户后，前端会传一个0过来，奇怪？？
             IEnumerable<OrderHeader> ords;
-            int records = _repo.GetCount(dteFrom, dteTo, ordNO, cnm, ordStatus, pageindex, pagesize);
+            int records = _repo.GetCount(dteFrom, dteTo, ordNO, cnm, ordStatus, pageindex, pagesize, cid);
 
-            ords = _repo.LoadOrder(dteFrom, dteTo, ordNO, cnm, ordStatus, pageindex, pagesize);
+            ords = _repo.LoadOrder(dteFrom, dteTo, ordNO, cnm, ordStatus, pageindex, pagesize, cid);
 
             return new GridData
             {
@@ -108,6 +108,11 @@ namespace OpenAuth.App.Business
         {
             string userid = OpenAuth.App.SSO.AuthUtil.GetUserName();
             _repo.UpdateOrderStatus(ordID, statusTo, userid);
+        }
+
+        public void DeleteOrder(string ordID)
+        {
+            _repo.DeleteOrder(ordID);
         }
     }
 }

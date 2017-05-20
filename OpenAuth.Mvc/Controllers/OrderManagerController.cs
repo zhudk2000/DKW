@@ -53,6 +53,26 @@ namespace OpenAuth.Mvc.Controllers
             return View();
         }
 
+        public ActionResult MyOrders()
+        {
+            string result = "";
+            if (CurrentModule != null)
+            {
+                User usr = AuthUtil.GetCurrentUser().User;
+                if (usr != null)
+                {
+                    string tmp = _app.GetCustID_NameByUserAcct(usr.Account);
+                    if (tmp != "")
+                    {
+                        result = tmp.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    }
+                }
+                
+                ViewData["CustomerID"] = result;
+            }
+            return View();
+        }
+
         [HttpPost]
         public string GetUserInfo()
         {
@@ -68,7 +88,7 @@ namespace OpenAuth.Mvc.Controllers
                 result.Message = ex.Message;
             }
             return JsonHelper.Instance.Serialize(result);
-            
+
         }
 
         [HttpPost]
@@ -102,7 +122,7 @@ namespace OpenAuth.Mvc.Controllers
             }
             return JsonHelper.Instance.Serialize(result);
         }
-        
+
         [HttpPost]
         public string SaveOrderCatch(OrderCatchVM view)
         {
@@ -120,14 +140,14 @@ namespace OpenAuth.Mvc.Controllers
             return JsonHelper.Instance.Serialize(result);
         }
 
-        public string Load(int page = 1, int rows = 30)
+        public string Load(int page = 1, int rows = 30, string cid = "")
         {
-            return JsonHelper.Instance.Serialize(_app.Load(page, rows));
+            return JsonHelper.Instance.Serialize(_app.Load(page, rows, cid));
         }
 
-        public string Query(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int page = 1, int rows = 30)
+        public string Query(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int page = 1, int rows = 30, string cid = "")
         {
-            return JsonHelper.Instance.Serialize(_app.Load(dteFrom, dteTo, ordNO, cnm, ordStatus, page, rows));
+            return JsonHelper.Instance.Serialize(_app.Load(dteFrom, dteTo, ordNO, cnm, ordStatus, page, rows, cid));
         }
 
         public string UpdateOrderStatus(string ordID, string statusTo)
@@ -145,7 +165,22 @@ namespace OpenAuth.Mvc.Controllers
             }
             return JsonHelper.Instance.Serialize(result);
         }
-
+        
+        public string DeleteOrder(string ordID)
+        {
+            Infrastructure.Response result = new Infrastructure.Response();
+            try
+            {
+                _app.DeleteOrder(ordID);
+                result.Message = "删除成功！";
+            }
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = ex.Message;
+            }
+            return JsonHelper.Instance.Serialize(result);
+        }
         //[ChildActionOnly]
         //public ActionResult GetOrderApproveAction()
         //{
@@ -159,7 +194,7 @@ namespace OpenAuth.Mvc.Controllers
         //        //sb.Append("<input type=\"hidden\" id=\"hidAction\" value=\"").Append(result).Append("\" ");
         //        ViewData["approve_action"] = result;
         //    }
-            
+
         //    return View();
         //}
 

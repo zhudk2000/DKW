@@ -184,6 +184,7 @@
     <Content Include="BllScripts\assignModule.js" />
     <Content Include="BllScripts\assignModuleElement.js" />
     <Content Include="BllScripts\Business\layer_validator.js" />
+    <Content Include="BllScripts\Business\my_orders.js" />
     <Content Include="BllScripts\Business\order_approve.js" />
     <Content Include="BllScripts\Business\order_catch.js" />
     <Content Include="BllScripts\Business\user_register.js" />
@@ -1219,6 +1220,7 @@
     <Content Include="Views\Login\UserRegister.cshtml" />
     <Content Include="Views\OrderManager\OrderCatch.cshtml" />
     <Content Include="Views\OrderManager\OrderApprove.cshtml" />
+    <Content Include="Views\OrderManager\MyOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

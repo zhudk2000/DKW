@@ -125,11 +125,13 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
             }
         }
 
-        public int GetCount()
+        public int GetCount(string custID = "")
         {
             int result = 0;
             DbCommand cmd = base.GetDbCommandObject();
             string sql = @"select count(*) from order_head order by order_id";
+            if (custID != "")
+                sql = "select count(*) from order_head where customer_id = '" + custID + "' order by order_id";
             cmd.CommandText = sql;
             try
             {
@@ -144,26 +146,33 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
             return result;
         }
 
-        private string getOrderQueryString()
+        private string getOrderQueryString(string custID = "")
         {
-            return @"
+            string strWhere = "";
+            string result =  @"
 	select h.order_id, h.customer_id, h.customer_name, h.contacts, h.contact_tel, 
 		h.contact_address, h.order_date, h.contract_id, h.sales_name, 
 		h.deliver_date, h.pick_date, h.order_status, h.AR_STATUS, h.Remark,
 		sum(d.amount) amount, sum(d.unit_quantity) qty
 	from order_head h, order_details d 
-	where h.order_id = d.order_id 
+	where h.order_id = d.order_id ##WHERE## 
 	group by h.order_id, h.customer_id, h.customer_name, h.contacts, h.contact_tel, 
 		h.contact_address, h.order_date, h.contract_id, h.sales_name, 
 		h.deliver_date, h.pick_date, h.order_status, h.AR_STATUS, h.Remark
 ";
+            if (custID != "")
+                strWhere = " and customer_id = '" + custID + "'";
+
+            result = result.Replace("##WHERE##", strWhere);
+
+            return result;
         }
 
-        public List<OrderHeader> LoadOrder(int pageindex, int pagesize)
+        public List<OrderHeader> LoadOrder(int pageindex, int pagesize, string custID = "")
         {
             List<OrderHeader> result = new List<OrderHeader>();
             DbCommand cmd = base.GetDbCommandObject();
-            string sql = getOrderQueryString() + @"
+            string sql = getOrderQueryString(custID) + @"
     order by h.order_id";
             cmd.CommandText = sql;
             try
@@ -203,7 +212,7 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
             return result;
         }
 
-        private DbCommand getQueryCommand(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus)
+        private DbCommand getQueryCommand(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, string custID = "")
         {
             DBUtility db = new DBUtility();
             DbCommand cmd = base.GetDbCommandObject();
@@ -240,16 +249,21 @@ where 1 = 1 ";
                 sql += " and order_status = @ordStatus";
                 db.NewParaWithValue("ordStatus", DbType.String, ordStatus, ref cmd);
             }
+            if (custID != "")
+            {
+                sql += " and customer_id = @custId";
+                db.NewParaWithValue("custId", DbType.String, custID, ref cmd);
+            }
             cmd.CommandText = sql;
 
             return cmd;
         }
 
-        public int GetCount(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int page = 1, int rows = 30)
+        public int GetCount(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int page = 1, int rows = 30, string custID = "")
         {
             int result = 0;
 
-            DbCommand cmd = getQueryCommand(dteFrom, dteTo, ordNO, cnm, ordStatus);
+            DbCommand cmd = getQueryCommand(dteFrom, dteTo, ordNO, cnm, ordStatus, custID);
             cmd.CommandText = "select count(*) from (" + cmd.CommandText + ") a";
             try
             {
@@ -262,10 +276,10 @@ where 1 = 1 ";
             return result;
         }
 
-        public List<OrderHeader> LoadOrder(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int page = 1, int rows = 30)
+        public List<OrderHeader> LoadOrder(string dteFrom, string dteTo, string ordNO, string cnm, string ordStatus, int page = 1, int rows = 30, string custID = "")
         {
             List<OrderHeader> result = new List<OrderHeader>();
-            DbCommand cmd = getQueryCommand(dteFrom, dteTo, ordNO, cnm, ordStatus);
+            DbCommand cmd = getQueryCommand(dteFrom, dteTo, ordNO, cnm, ordStatus, custID);
             cmd.CommandText = "select * from (" + cmd.CommandText + ") tmp1 where seq > " + rows * (page - 1) + " and seq <= " + rows * page;
             try
             {
@@ -324,6 +338,25 @@ end";
                 db.NewParaWithValue("stat", DbType.String, statusTo, ref cmd);
                 db.NewParaWithValue("ordID", DbType.String, ordID, ref cmd);
                 db.NewParaWithValue("usrid", DbType.String, userID, ref cmd);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e) { throw e; }
+            finally { cmd.Dispose(); }
+        }
+
+        public void DeleteOrder(string ordID)
+        {
+            string sql =@"delete from order_head where order_id = @ordID";
+            DbCommand cmd = base.GetDbCommandObject();
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            DBUtility db = new DBUtility();
+
+            try
+            {
+                if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
+                db.NewParaWithValue("ordID", DbType.String, ordID, ref cmd);
 
                 cmd.ExecuteNonQuery();
             }
