@@ -149,7 +149,7 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
         private string getOrderQueryString(string custID = "")
         {
             string strWhere = "";
-            string result =  @"
+            string result = @"
 	select h.order_id, h.customer_id, h.customer_name, h.contacts, h.contact_tel, 
 		h.contact_address, h.order_date, h.contract_id, h.sales_name, 
 		h.deliver_date, h.pick_date, h.order_status, h.AR_STATUS, h.Remark,

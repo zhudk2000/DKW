@@ -8,47 +8,58 @@ function MainGrid() {
                 {
                     name: 'Order_id',
                     index: 'Order_id',
-                    label: '订单号'
+                    label: '订单号',
+                    width: 60
                 },
                 {
                     index: 'Order_date',
                     name: 'Order_date',
-                    label: '创建时间'
+                    label: '创建时间',
+                    formatter: 'date',
+                    formatoptions: { srcformat: 'Y-m-d H:i', newformat: 'Y-m-d H:i' },
+                    width: 80
                 },
                 {
                     index: 'Customer_id',
                     name: 'Customer_id',
-                    label: '客户编号'
+                    label: '客户编号',
+                    width: 40
                 },
                 {
                     index: 'Customer_name',
                     name: 'Customer_name',
-                    label: '客户名称'
+                    label: '客户名称',
+                    width: 70
                 },
                 {
                     index: 'Contact_address',
                     name: 'Contact_address',
-                    label: '客户地址'
+                    label: '客户地址',
+                    width: 160
                 },
                 {
                     index: 'Contacts',
                     name: 'Contacts',
-                    label: '联系人'
+                    label: '联系人',
+                    width: 60
                 },
                 {
                     index: 'Contact_tel',
                     name: 'Contact_tel',
-                    label: '联系电话'
+                    label: '联系电话',
+                    width: 60
                 },
                 {
                     index: 'Amount',
                     name: 'Amount',
-                    label: '存储费'
+                    label: '存储费',
+                    width: 40
                 },
                 {
                     index: 'Quantity',
                     name: 'Quantity',
-                    label: '箱数'
+                    label: '箱数',
+                    width: 40
                 },
                 {
                     index: 'Order_status',
@@ -58,14 +69,12 @@ function MainGrid() {
                 {
                     index: 'act',
                     name: 'act',
-                    label: '操作'
+                    label: '操作',
+                    width: 100
                 }
             ],
             url: url,
             datatype: "json",
-            postData: {
-                page: 1, rows: 30, cid: $("#qryCustomerID").val()
-            },
 
             viewrecords: true,
             rowNum: 30,
@@ -74,6 +83,7 @@ function MainGrid() {
             height: 'auto',
             multiselect: true,
             multiboxonly: true,
+            autowidth: true,
 
             loadComplete: function () {
                 var table = this;
