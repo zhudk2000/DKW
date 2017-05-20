@@ -82,10 +82,15 @@ function MainGrid() {
                 var ids = $("#maingrid").jqGrid('getDataIDs');
                 for (var i = 0; i < ids.length; i++) {
                     var c = ids[i];
+                    //$("#hidAction").val()  approve  boss_approve
                     var s = "客服<a href='#' onclick=\"approve('" + c + "');\">未确认</a>";
                     var status = $("#maingrid").jqGrid('getCell', c, "Order_status");
                     if ((status) && (status == "1")) {
-                        s = "已确认<a href='#' onclick=\"boss_approve('" + c + "');\">未审核</a>";
+                        s = "已确认";
+                        if ($("#hidAction").val() == "boss_approve")
+                            s = s + "<a href='#' onclick=\"boss_approve('" + c + "');\">未审核</a>";
+                        else
+                            s = s + "未审核";
                     } else if ((status) && (status == "2")) {
                         s = "已审核";
                     }
@@ -129,6 +134,7 @@ function setComboValues() {
 }
 
 function approve(idx) {
+    
     //alert("approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
     var tempObj = layer.confirm("确定要修改此订单的状态为已确认吗？",
         null,
@@ -163,6 +169,7 @@ function boss_approve(idx) {
 $(function () {
 
     $("#btnQuery").on("click", function () {
+        alert($("#hidAction").val());
         //$.post()
         //alert($("#qryDateFrom").val());
         list.reload();

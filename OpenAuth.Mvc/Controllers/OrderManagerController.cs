@@ -11,6 +11,7 @@ using OpenAuth.Domain;
 using OpenAuth.Domain.Business;
 using OpenAuth.Mvc.Models;
 using OpenAuth.App.SSO;
+using System.Text;
 
 namespace OpenAuth.Mvc.Controllers
 {
@@ -41,6 +42,14 @@ namespace OpenAuth.Mvc.Controllers
 
         public ActionResult OrderApprove()
         {
+            string result = "approve";
+            if (Request["act"] != null)
+                result = "boss_approve";
+
+            if (CurrentModule != null)
+            {
+                ViewData["approve_action"] = result;
+            }
             return View();
         }
 
@@ -136,5 +145,23 @@ namespace OpenAuth.Mvc.Controllers
             }
             return JsonHelper.Instance.Serialize(result);
         }
+
+        //[ChildActionOnly]
+        //public ActionResult GetOrderApproveAction()
+        //{
+        //    string result = "approve";
+        //    if (Request[""] == "2")
+        //        result = "boss_approve";
+
+        //    var sb = new StringBuilder();
+        //    if (CurrentModule != null)
+        //    {
+        //        //sb.Append("<input type=\"hidden\" id=\"hidAction\" value=\"").Append(result).Append("\" ");
+        //        ViewData["approve_action"] = result;
+        //    }
+            
+        //    return View();
+        //}
+
     }
 }

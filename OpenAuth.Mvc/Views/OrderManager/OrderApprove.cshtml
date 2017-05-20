@@ -25,6 +25,7 @@
                         <div class="widget-main">
                             <form class="form-inline">
                                 <div class="form-group">
+                                    <input type="hidden" id="hidAction" value='@ViewData["approve_action"]' />
                                     <label>&nbsp;订单日期:从</label>
                                     @*<input type="date" class="form-control" id="qryDateFrom" maxlength="30" placeholder="请输入" />*@
                                     <input id="qryDateFrom" style="width:120px;" class="layui-input" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
