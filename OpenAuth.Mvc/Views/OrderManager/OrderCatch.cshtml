@@ -38,7 +38,11 @@
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label no-padding-right" for=""> 服务项目 </label>
                                     <div class="col-sm-2">
-                                        <input type="text" id="Service_item" v-model="Service_item" placeholder="请选择" maxlength="60" isvalid="yes" checkexpession="NotNull" errormsg="服务项目" />
+                                        @*<input type="text" id="Service_item" v-model="Service_item" placeholder="请选择" maxlength="60" isvalid="yes" checkexpession="NotNull" errormsg="服务项目" />*@
+                                        <select id="Service_item" v-model="Service_item" isvalid="yes" checkexpession="NotNull" errormsg="服务项目">
+                                            <option value="" selected>请选择服务项目</option>
+                                            <option value="存储费">存储费</option>
+                                        </select>
                                     </div>
                                     <label class="col-sm-1 control-label no-padding-right" for=""> 联系人 </label>
                                     <div class="col-sm-2">

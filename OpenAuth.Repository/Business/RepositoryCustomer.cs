@@ -51,13 +51,20 @@ insert into customer(
             db.NewParaWithValue("bank_account", DbType.String, entity.Bank_Acct, ref cmd);
 
             string sqlUser = @"
+begin
 insert into [user](
     id, Account, Password, Name, Sex, 
     Status, Type, CreateTime, CrateId, customer_id
 ) values(
     newid(), @Account, @Password, @Name, 0, 
     0, 0, getdate(), NULL, @customer_id
-)";
+)
+
+insert into Relevance(Id, [Description], [Key], [Status], OperateTime, OperatorId, FirstId, SecondId)
+select newid(), '', 'UserRole', 0, getdate(), 0, u.Id, r.Id
+from [user] u, [role] r
+where u.Account = @Account and r.name = '外部客户下单'
+end";
             DbTransaction dt = null;
             try
             {

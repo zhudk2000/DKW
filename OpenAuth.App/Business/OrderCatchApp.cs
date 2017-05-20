@@ -103,5 +103,11 @@ namespace OpenAuth.App.Business
                 page = pageindex
             };
         }
+
+        public void UpdateOrderStatus(string ordID, string statusTo)
+        {
+            string userid = OpenAuth.App.SSO.AuthUtil.GetUserName();
+            _repo.UpdateOrderStatus(ordID, statusTo, userid);
+        }
     }
 }

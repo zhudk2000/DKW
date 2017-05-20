@@ -120,5 +120,21 @@ namespace OpenAuth.Mvc.Controllers
         {
             return JsonHelper.Instance.Serialize(_app.Load(dteFrom, dteTo, ordNO, cnm, ordStatus, page, rows));
         }
+
+        public string UpdateOrderStatus(string ordID, string statusTo)
+        {
+            Infrastructure.Response result = new Infrastructure.Response();
+            try
+            {
+                _app.UpdateOrderStatus(ordID, statusTo);
+                result.Message = "操作成功！";
+            }
+            catch (Exception ex)
+            {
+                result.Status = false;
+                result.Message = ex.Message;
+            }
+            return JsonHelper.Instance.Serialize(result);
+        }
     }
 }

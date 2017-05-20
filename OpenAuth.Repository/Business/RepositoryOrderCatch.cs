@@ -305,6 +305,30 @@ where 1 = 1 ";
             return result;
         }
 
+        public void UpdateOrderStatus(string ordID, string statusTo, string userID)
+        {
+            string sql =
+@"begin
+	update order_head set order_status = @stat where order_id = @ordID
+	insert into order_status_log(order_id, order_status_to, changed_by) values(@ordID, @stat, @usrid)
+end";
+            DbCommand cmd = base.GetDbCommandObject();
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            DBUtility db = new DBUtility();
 
+            try
+            {
+                if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
+
+                db.NewParaWithValue("stat", DbType.String, statusTo, ref cmd);
+                db.NewParaWithValue("ordID", DbType.String, ordID, ref cmd);
+                db.NewParaWithValue("usrid", DbType.String, userID, ref cmd);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e) { throw e; }
+            finally { cmd.Dispose(); }
+        }
     }
 }

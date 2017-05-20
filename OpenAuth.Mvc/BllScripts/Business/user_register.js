@@ -16,8 +16,7 @@
                             $.post("/Login/UserRegister", vm.$data, function (data) {
                                 if (data.Status) {
                                     layer.msg("用户名(" + $("#Account").val() + ")创建成功，即将转入登录页面！！！");
-                                    $.delay(1000);
-                                    
+                                    setTimeout(backToLogin, 3000);
                                 }
                             }, "json");
                         });
@@ -128,6 +127,10 @@
             }
         }
         return result;
+    }
+
+    function backToLogin() {
+        window.location.href = "/Login/Index";
     }
 });
 

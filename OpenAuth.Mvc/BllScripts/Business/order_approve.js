@@ -86,7 +86,7 @@ function MainGrid() {
                     var status = $("#maingrid").jqGrid('getCell', c, "Order_status");
                     if ((status) && (status == "1")) {
                         s = "已确认<a href='#' onclick=\"boss_approve('" + c + "');\">未审核</a>";
-                    } else if ((status) && (status == "9")) {
+                    } else if ((status) && (status == "2")) {
                         s = "已审核";
                     }
                     
@@ -129,11 +129,35 @@ function setComboValues() {
 }
 
 function approve(idx) {
-    alert("approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
+    //alert("approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
+    var tempObj = layer.confirm("确定要修改此订单的状态为已确认吗？",
+        null,
+        function () {
+            layer.close(tempObj);
+            $.post("/OrderManager/UpdateOrderStatus", { ordID:$("#maingrid").jqGrid('getCell', idx, "Order_id"), statusTo: "1"}, function (data) {
+                layer.msg(data.Message);
+                if (data.Status) {
+                    list.reload();
+                }
+            }, "json");
+        }
+    );
 }
 
 function boss_approve(idx) {
-    alert("boss_approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
+    //alert("boss_approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
+    var tempObj = layer.confirm("确定要修改此订单的状态为已审核吗？",
+        null,
+        function () {
+            layer.close(tempObj);
+            $.post("/OrderManager/UpdateOrderStatus", { ordID: $("#maingrid").jqGrid('getCell', idx, "Order_id"), statusTo: "2" }, function (data) {
+                layer.msg(data.Message);
+                if (data.Status) {
+                    list.reload();
+                }
+            }, "json");
+        }
+    );
 }
 
 $(function () {
