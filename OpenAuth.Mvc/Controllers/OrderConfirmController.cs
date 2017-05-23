@@ -8,13 +8,14 @@ using OpenAuth.App;
 using OpenAuth.App.ViewModel;
 using OpenAuth.Domain;
 using OpenAuth.Mvc.Models;
+using OpenAuth.App.SSO;
 
 namespace OpenAuth.Mvc.Controllers
 {
-    public class CustomerManagerController : BaseController
+    public class OrderConfirmController : BaseController
     {
         private CustomerApp _app;
-        public CustomerManagerController()
+        public OrderConfirmController()
         {
             _app = AutofacExt.GetFromFac<CustomerApp>();
         }
@@ -82,6 +83,5 @@ namespace OpenAuth.Mvc.Controllers
         {
             return JsonHelper.Instance.Serialize(_app.LoadCustomerInfo(ccd, cnm, page, rows));
         }
-
     }
 }

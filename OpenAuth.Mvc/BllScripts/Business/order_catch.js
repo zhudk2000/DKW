@@ -18,12 +18,20 @@
             if (!$("#editForm").Validform()) {
                 //validation failed
             } else {
+                if ((vm.$data.Customer_id) && (vm.$data.Customer_id != "")) {
+                    layer.msg("仅限外部用户使用，总部用户请使用订单确认-新建订单功能！");
+                    return false;
+                }
+
                 var tempObj = layer.confirm("您确定要保存吗？",
                     null,
                     function () {
                         layer.close(tempObj);
                         var tmp = getWebserviceStr("/OrderManager/GetNextOrderNumber", {});
                         $("#lblOrderID").text(tmp);
+
+                        $("#Unit_price").val(getDocStoreUnitPriceByQty(vm.$data.Quantity));
+                        vm.$data.Unit_price = $("#Unit_price").val();
 
                         $("#lblCustName").text(vm.$data.Customer_name);
                         $("#lblServiceItem").text(vm.$data.Service_item);

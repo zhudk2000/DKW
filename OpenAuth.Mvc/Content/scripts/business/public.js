@@ -145,4 +145,29 @@ function doPrintDiv(divID) {
     }
 }
 
+function getDocStoreUnitPriceByQty(qty) {
+    var price = 10;
+    if (qty < 10)
+        price = 10;
+    else if ((qty >= 10) && (qty < 30))
+        price = 8;
+    else if ((qty >= 10) && (qty < 30))
+        price = 8;
+    else if ((qty >= 30) && (qty < 50))
+        price = 7;
+    else if ((qty >= 50) && (qty < 100))
+        price = 5;
+    else if ((qty >= 100) && (qty < 200))
+        price = 4;
+    else if ((qty >= 200) && (qty < 1000))
+        price = 3;
+    else if ((qty >= 1000) && (qty < 5000))
+        price = 2;
+    else if ((qty >= 5000) && (qty < 10000))
+        price = 1.7;
+    else
+        price = 1.3;
+
+    return price;
+}
 

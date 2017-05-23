@@ -11,10 +11,10 @@ using OpenAuth.Mvc.Models;
 
 namespace OpenAuth.Mvc.Controllers
 {
-    public class CustomerManagerController : BaseController
+    public class OrderApproveController : BaseController
     {
         private CustomerApp _app;
-        public CustomerManagerController()
+        public OrderApproveController()
         {
             _app = AutofacExt.GetFromFac<CustomerApp>();
         }
@@ -82,6 +82,5 @@ namespace OpenAuth.Mvc.Controllers
         {
             return JsonHelper.Instance.Serialize(_app.LoadCustomerInfo(ccd, cnm, page, rows));
         }
-
     }
 }

@@ -153,6 +153,8 @@
     <Compile Include="AutofacExt.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryManagerController.cs" />
+    <Compile Include="Controllers\OrderApproveController.cs" />
+    <Compile Include="Controllers\OrderConfirmController.cs" />
     <Compile Include="Controllers\CustomerManagerController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Areas\FlowManage\Controllers\FlowInstancesController.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModuleElementManagerController.cs" />
     <Compile Include="Controllers\ModuleManagerController.cs" />
+    <Compile Include="Controllers\OrderCatchController.cs" />
     <Compile Include="Controllers\OrderManagerController.cs" />
     <Compile Include="Controllers\OrgManagerController.cs" />
     <Compile Include="Controllers\RelevanceManagerController.cs" />
@@ -187,6 +190,7 @@
     <Content Include="BllScripts\Business\my_orders.js" />
     <Content Include="BllScripts\Business\order_approve.js" />
     <Content Include="BllScripts\Business\order_catch.js" />
+    <Content Include="BllScripts\Business\order_catch_inConfirmPage.js" />
     <Content Include="BllScripts\Business\user_register.js" />
     <Content Include="BllScripts\categoryManager.js" />
     <Content Include="BllScripts\customermanager.js" />
@@ -1218,9 +1222,10 @@
     <Content Include="Views\Shared\_FlowForm.cshtml" />
     <Content Include="Views\Shared\_Form.cshtml" />
     <Content Include="Views\Login\UserRegister.cshtml" />
-    <Content Include="Views\OrderManager\OrderCatch.cshtml" />
-    <Content Include="Views\OrderManager\OrderApprove.cshtml" />
+    <Content Include="Views\OrderCatch\OrderCatch.cshtml" />
     <Content Include="Views\OrderManager\MyOrders.cshtml" />
+    <Content Include="Views\OrderConfirm\Index.cshtml" />
+    <Content Include="Views\OrderApprove\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -96,17 +96,18 @@ function MainGrid() {
                 for (var i = 0; i < ids.length; i++) {
                     var c = ids[i];
                     //$("#hidAction").val()  approve  boss_approve
-                    var s = "客服<a href='#' onclick=\"approve('" + c + "');\">未确认</a>";
+                    var s = "未确认";
                     var status = $("#maingrid").jqGrid('getCell', c, "Order_status");
                     if ((status) && (status == "1")) {
                         s = "已确认";
                         if ($("#hidAction").val() == "boss_approve")
-                            s = s + "<a href='#' onclick=\"boss_approve('" + c + "');\">未审核</a>";
+                            s = s + "未审核";
                         else
                             s = s + "未审核";
                     } else if ((status) && (status == "2")) {
                         s = "已审核";
-                    }
+                    } else if ((status) && (status == "3"))
+                        s = "驳回";
                     
                     $("#maingrid").jqGrid('setRowData', ids[i], { act: s });
                 }
@@ -146,14 +147,15 @@ function setComboValues() {
     });
 }
 
-function approve(idx) {
+function approve() {
     
     //alert("approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
-    var tempObj = layer.confirm("确定要修改此订单的状态为已确认吗？",
+    var selected = list.getSelectedObj();
+    var tempObj = layer.confirm("确定要修改此订单[" + selected.Order_id + "]的状态为已审核吗？",
         null,
         function () {
             layer.close(tempObj);
-            $.post("/OrderManager/UpdateOrderStatus", { ordID:$("#maingrid").jqGrid('getCell', idx, "Order_id"), statusTo: "1"}, function (data) {
+            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "2"}, function (data) {
                 layer.msg(data.Message);
                 if (data.Status) {
                     list.reload();
@@ -163,13 +165,31 @@ function approve(idx) {
     );
 }
 
-function boss_approve(idx) {
-    //alert("boss_approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
-    var tempObj = layer.confirm("确定要修改此订单的状态为已审核吗？",
+function un_approve() {
+
+    //alert("approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
+    var selected = list.getSelectedObj();
+    var tempObj = layer.confirm("确定要修改此订单[" + selected.Order_id + "]的状态为驳回吗？",
         null,
         function () {
             layer.close(tempObj);
-            $.post("/OrderManager/UpdateOrderStatus", { ordID: $("#maingrid").jqGrid('getCell', idx, "Order_id"), statusTo: "2" }, function (data) {
+            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "3" }, function (data) {
+                layer.msg(data.Message);
+                if (data.Status) {
+                    list.reload();
+                }
+            }, "json");
+        }
+    );
+}
+
+function confirm() {
+    var selected = list.getSelectedObj();
+    var tempObj = layer.confirm("确定要修改此订单[" + selected.Order_id + "]的状态为已确认吗？",
+        null,
+        function () {
+            layer.close(tempObj);
+            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "1" }, function (data) {
                 layer.msg(data.Message);
                 if (data.Status) {
                     list.reload();

@@ -125,6 +125,66 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
             }
         }
 
+        public void Update(OrderHeader view)
+        {
+            string sqlH =
+@"update order_head set customer_id = @customer_id, customer_name = @customer_name,
+	contacts = @contacts, contact_tel = @contact_tel, contact_address = @contact_address
+where order_id = @order_id";
+            string sqlD =
+@"update order_details 
+set quantity = @quantity, unit_price = @unit_price, amount = @amount, service_item = @service_item 
+where order_id = @order_id and order_line_id = @order_line_id";
+            DbCommand cmd = base.GetDbCommandObject();
+            DbTransaction dt = null;
+            cmd.CommandText = sqlH;
+            cmd.CommandType = CommandType.Text;
+            DBUtility db = new DBUtility();
+            try
+            {
+                if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
+                dt = cmd.Connection.BeginTransaction();
+                cmd.Transaction = dt;
+
+                db.NewParaWithValue("customer_id", DbType.String, view.Customer_id, ref cmd);
+                db.NewParaWithValue("customer_name", DbType.String, view.Customer_name, ref cmd);
+                db.NewParaWithValue("contacts", DbType.String, view.Contacts, ref cmd);
+                db.NewParaWithValue("contact_tel", DbType.String, view.Contact_tel, ref cmd);
+                db.NewParaWithValue("contact_address", DbType.String, view.Contact_address, ref cmd);
+                db.NewParaWithValue("order_id", DbType.String, view.Order_id, ref cmd);
+
+                cmd.ExecuteNonQuery();
+
+                foreach (OrderDetail od in view.orderDetail)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.CommandText = sqlD;
+
+                    db.NewParaWithValue("order_id", DbType.String, view.Order_id, ref cmd);
+                    db.NewParaWithValue("order_line_id", DbType.String, od.Order_line_id, ref cmd);
+                    db.NewParaWithValue("quantity", DbType.Decimal, od.Quantity, ref cmd);
+                    db.NewParaWithValue("unit_price", DbType.Decimal, od.Unit_price, ref cmd);
+                    db.NewParaWithValue("amount", DbType.Decimal, od.Amount, ref cmd);
+                    db.NewParaWithValue("service_item", DbType.String, od.Service_item, ref cmd);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                dt.Commit();
+            }
+            catch (Exception e)
+            {
+                if (dt != null) dt.Rollback();
+                throw;
+            }
+            finally
+            {
+                if (dt != null) dt.Dispose();
+                cmd.Dispose();
+            }
+        }
+
+
         public int GetCount(string custID = "")
         {
             int result = 0;
@@ -153,7 +213,7 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
 	select h.order_id, h.customer_id, h.customer_name, h.contacts, h.contact_tel, 
 		h.contact_address, h.order_date, h.contract_id, h.sales_name, 
 		h.deliver_date, h.pick_date, h.order_status, h.AR_STATUS, h.Remark,
-		sum(d.amount) amount, sum(d.unit_quantity) qty
+		sum(d.amount) amount, sum(d.quantity) qty
 	from order_head h, order_details d 
 	where h.order_id = d.order_id ##WHERE## 
 	group by h.order_id, h.customer_id, h.customer_name, h.contacts, h.contact_tel, 
@@ -203,7 +263,7 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
                     result.Add(oh);
                 }
             }
-            catch (Exception e) { }
+            catch (Exception e) { throw; }
             finally
             {
                 cmd.Dispose();

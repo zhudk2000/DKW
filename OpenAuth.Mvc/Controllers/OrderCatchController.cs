@@ -15,10 +15,10 @@ using System.Text;
 
 namespace OpenAuth.Mvc.Controllers
 {
-    public class OrderManagerController : BaseController
+    public class OrderCatchController : BaseController
     {
         private OrderCatchApp _app;
-        public OrderManagerController()
+        public OrderCatchController()
         {
             _app = AutofacExt.GetFromFac<OrderCatchApp>();
         }
@@ -133,23 +133,6 @@ namespace OpenAuth.Mvc.Controllers
             try
             {
                 _app.SaveOrderCatch(view);
-                result.Message = "保存成功！";
-            }
-            catch (Exception ex)
-            {
-                result.Status = false;
-                result.Message = ex.Message;
-            }
-            return JsonHelper.Instance.Serialize(result);
-        }
-
-        [HttpPost]
-        public string Update(OrderCatchVM view)
-        {
-            Infrastructure.Response result = new Infrastructure.Response();
-            try
-            {
-                _app.Update(view);
                 result.Message = "保存成功！";
             }
             catch (Exception ex)

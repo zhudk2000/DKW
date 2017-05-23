@@ -70,6 +70,35 @@ namespace OpenAuth.App.Business
             _repo.SaveOrderCatch(oh);
         }
 
+        public void Update(OrderCatchVM view)
+        {
+            OrderHeader oh = new OrderHeader();
+            OrderDetail od = new OrderDetail();
+
+            oh.Contacts = view.Contacts;
+            oh.Contact_address = view.Contact_address;
+            oh.Contact_tel = view.Contact_tel;
+            oh.Contract_id = view.Contract_id;
+            oh.Customer_id = view.Customer_id;
+            oh.Customer_name = view.Customer_name;
+            oh.Order_date = DateTime.Now;
+            oh.Order_id = view.Order_id;
+            oh.Sales_name = view.User_ID;
+
+            od.Order_line_id = "1";
+            od.Qnit_uom = "箱";
+            od.Quantity = view.Quantity;
+            od.Service_item = view.Service_item;
+            od.Unit_price = view.Unit_price;
+            od.Unit_quantity = view.Unit_quantity;
+            od.Amount = view.Amount;
+
+            oh.orderDetail = new List<OrderDetail>();
+            oh.orderDetail.Add(od);
+
+            _repo.Update(oh);
+        }
+
         public GridData Load(int pageindex, int pagesize, string cid = "")
         {
             if (pageindex < 1) pageindex = 1;  //TODO:如果列表为空新增加一个用户后，前端会传一个0过来，奇怪？？
