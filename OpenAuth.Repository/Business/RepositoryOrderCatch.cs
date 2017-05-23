@@ -379,11 +379,11 @@ where 1 = 1 ";
             return result;
         }
 
-        public void UpdateOrderStatus(string ordID, string statusTo, string userID)
+        public void UpdateOrderStatus(string ordID, string statusTo, string userID, string remark = "")
         {
             string sql =
 @"begin
-	update order_head set order_status = @stat where order_id = @ordID
+	update order_head set order_status = @stat, [remark] = @remark where order_id = @ordID
 	insert into order_status_log(order_id, order_status_to, changed_by) values(@ordID, @stat, @usrid)
 end";
             DbCommand cmd = base.GetDbCommandObject();
@@ -398,6 +398,7 @@ end";
                 db.NewParaWithValue("stat", DbType.String, statusTo, ref cmd);
                 db.NewParaWithValue("ordID", DbType.String, ordID, ref cmd);
                 db.NewParaWithValue("usrid", DbType.String, userID, ref cmd);
+                db.NewParaWithValue("remark", DbType.String, remark, ref cmd);
 
                 cmd.ExecuteNonQuery();
             }

@@ -133,10 +133,10 @@ namespace OpenAuth.App.Business
             };
         }
 
-        public void UpdateOrderStatus(string ordID, string statusTo)
+        public void UpdateOrderStatus(string ordID, string statusTo, string remark = "")
         {
             string userid = OpenAuth.App.SSO.AuthUtil.GetUserName();
-            _repo.UpdateOrderStatus(ordID, statusTo, userid);
+            _repo.UpdateOrderStatus(ordID, statusTo, userid, remark);
         }
 
         public void DeleteOrder(string ordID)

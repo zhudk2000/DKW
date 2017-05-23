@@ -170,12 +170,12 @@ namespace OpenAuth.Mvc.Controllers
             return JsonHelper.Instance.Serialize(_app.Load(dteFrom, dteTo, ordNO, cnm, ordStatus, page, rows, cid));
         }
 
-        public string UpdateOrderStatus(string ordID, string statusTo)
+        public string UpdateOrderStatus(string ordID, string statusTo, string remark = "")
         {
             Infrastructure.Response result = new Infrastructure.Response();
             try
             {
-                _app.UpdateOrderStatus(ordID, statusTo);
+                _app.UpdateOrderStatus(ordID, statusTo, remark);
                 result.Message = "操作成功！";
             }
             catch (Exception ex)

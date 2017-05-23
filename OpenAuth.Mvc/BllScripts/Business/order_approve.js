@@ -1,4 +1,6 @@
-﻿
+﻿var vm = new Vue({
+    el: '#editDlg2'
+});
 //grid列表模块
 function MainGrid() {
     var url = '/OrderManager/Load';
@@ -17,7 +19,7 @@ function MainGrid() {
                     label: '创建时间',
                     formatter: 'date',
                     formatoptions: { srcformat: 'Y-m-d H:i', newformat: 'Y-m-d H:i' },
-                    width: 80
+                    width: 70
                 },
                 {
                     index: 'Customer_id',
@@ -69,8 +71,14 @@ function MainGrid() {
                 {
                     index: 'act',
                     name: 'act',
-                    label: '操作',
-                    width: 100
+                    label: '状态',
+                    width: 50
+                },
+                {
+                    index: 'Remark',
+                    name: 'Remark',
+                    label: '处理意见',
+                    width: 60
                 }
             ],
             url: url,
@@ -83,13 +91,13 @@ function MainGrid() {
             height: 'auto',
             multiselect: true,
             multiboxonly: true,
-            autowidth:true,
+            autowidth: true,
 
             loadComplete: function () {
                 var table = this;
                 setTimeout(function () {
                     updatePagerIcons(table);
-                },0);
+                }, 0);
             },
             gridComplete: function () {
                 var ids = $("#maingrid").jqGrid('getDataIDs');
@@ -108,7 +116,7 @@ function MainGrid() {
                         s = "已审核";
                     } else if ((status) && (status == "3"))
                         s = "驳回";
-                    
+
                     $("#maingrid").jqGrid('setRowData', ids[i], { act: s });
                 }
             }
@@ -148,14 +156,14 @@ function setComboValues() {
 }
 
 function approve() {
-    
+
     //alert("approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
     var selected = list.getSelectedObj();
     var tempObj = layer.confirm("确定要修改此订单[" + selected.Order_id + "]的状态为已审核吗？",
         null,
         function () {
             layer.close(tempObj);
-            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "2"}, function (data) {
+            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "2" }, function (data) {
                 layer.msg(data.Message);
                 if (data.Status) {
                     list.reload();
@@ -165,22 +173,34 @@ function approve() {
     );
 }
 
-function un_approve() {
+//function un_approve() {
 
-    //alert("approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
+//    //alert("approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
+//    var selected = list.getSelectedObj();
+//    var tempObj = layer.confirm("确定要修改此订单[" + selected.Order_id + "]的状态为驳回吗？",
+//        null,
+//        function () {
+//            layer.close(tempObj);
+//            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "3" }, function (data) {
+//                layer.msg(data.Message);
+//                if (data.Status) {
+//                    list.reload();
+//                }
+//            }, "json");
+//        }
+//    );
+//}
+
+function un_approve() {
     var selected = list.getSelectedObj();
-    var tempObj = layer.confirm("确定要修改此订单[" + selected.Order_id + "]的状态为驳回吗？",
-        null,
-        function () {
-            layer.close(tempObj);
-            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "3" }, function (data) {
-                layer.msg(data.Message);
-                if (data.Status) {
-                    list.reload();
-                }
-            }, "json");
-        }
-    );
+    if (selected == null) {
+        return;
+    }
+
+    if (selected.Order_status == "2")
+        layer.msg("不允许修改已审核通过的订单！");
+    else
+        editDlg2.update(selected);
 }
 
 function confirm() {
@@ -212,3 +232,62 @@ $(function () {
     });
 
 });
+
+
+//添加（编辑）对话框
+var editDlg2 = function () {
+    var update = false;
+    var show = function () {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim', //加上边框
+            title: "输入驳回理由", //不显示标题
+            area: ['400px', '300px'], //宽高
+            content: $('#editDlg2'), //捕获的元素
+            btn: ['保存', '关闭'],
+            yes: function (index, layero) {
+                var isContinue = true;
+                if (!$("#editForm").Validform()) {
+                    //validation failed
+                    isContinue = false;
+                }
+                //
+                if (isContinue && update) {
+                    var tempObj = layer.confirm("您确定要驳回次订单吗？",
+                        null,
+                        function () {
+                            layer.close(tempObj);
+
+                            var selected = list.getSelectedObj();
+                            var orderId = selected.Order_id;
+
+                            //vm.$data.Remark;
+                            vm.$data.Order_id = orderId;
+                            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "3", remark: vm.$data.Remark}, function (data) {
+                                layer.msg(data.Message);
+                                if (data.Status) {
+                                    list.reload();
+                                }
+                            }, "json");
+                        }
+                    );
+                }
+            },
+            btn2: function (index, layero) {
+                $("#editDlg2").hide();
+            },
+            cancel: function (index, layero) {
+                $("#editDlg2").hide();
+            }
+        });
+    }
+    return {
+        update: function (ret) {  //弹出编辑框
+            update = true;
+            show();
+            vm.$set('$data', ret);
+            //$("#CustomerCode").attr("readonly", "readonly");
+        }
+    };
+}();
+

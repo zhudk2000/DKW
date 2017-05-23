@@ -23,7 +23,7 @@
                     </div>
                     <div class="widget-body gridwidth">
                         <div class="widget-main">
-                            <form class="form-inline">
+                            <div class="form-inline">
                                 <div class="form-group">
                                     <input type="hidden" id="hidAction" value='@ViewData["approve_action"]' />
                                     <label>&nbsp;订单日期:从</label>
@@ -54,7 +54,7 @@
                                 </div>
                                 <button id="btnQuery" class="btn-primary">查 询</button>
 
-                            </form>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12 ">
                                     <table id="maingrid"></table>
@@ -67,6 +67,25 @@
             </div>
         </div>
     </div>
+
+    <div id="editDlg2" style="display: none">
+        <div class="col-xs-12">
+            <form class="form-horizontal" id="editForm">
+                <br />
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label no-padding-right" for=""> 驳回理由 </label>
+                    <div class="col-sm-2">
+                        @*<input type="text" id="Remark" v-model="Quantity" placeholder="请输入驳回理由" maxlength="100" errormsg="驳回理由" />*@
+                        <textarea id="Remark" v-model="Remark" rows="3" cols="30" isvalid="yes" checkexpession="NotNull" errormsg="驳回理由"></textarea>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
 </div><!-- /.page-content -->
 <!--编辑对话框-->
 
@@ -79,7 +98,9 @@
 <script src="~/Content/scripts/utils/ui.js"></script>
 <script src="~/Content/scripts/dist/js/bootstrap-select.js"></script>
 <link href="~/Content/scripts/dist/css/bootstrap-select.css" rel="stylesheet" />
-@*<script src="~/Content/scripts/plugins/datepicker/DatePicker.js"></script>*@
+<script src="~/Content/scripts/business/public.js"></script>
+<script src="~/BllScripts/Business/layer_validator.js"></script>
+
 <script>
     layui.use('laydate', function () {
         var laydate = layui.laydate;
