@@ -64,6 +64,8 @@ var editDlg = function () {
                         var tempObj = layer.confirm("确定要修改吗？",
                             null,
                             function () {
+                                vm.$data.Unit_price = getDocStoreUnitPriceByQty(vm.$data.Quantity);
+                                vm.$data.Amount = vm.$data.Unit_price * vm.$data.Quantity;
                                 layer.close(tempObj);
                                 $.post("/OrderManager/Update", vm.$data, function (data) {
                                     layer.msg(data.Message);
