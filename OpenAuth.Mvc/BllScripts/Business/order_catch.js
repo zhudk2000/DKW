@@ -18,7 +18,7 @@
             if (!$("#editForm").Validform()) {
                 //validation failed
             } else {
-                if ((vm.$data.Customer_id) && (vm.$data.Customer_id != "")) {
+                if ((!vm.$data.Customer_id) || (vm.$data.Customer_id == "")) {
                     layer.msg("仅限外部用户使用，总部用户请使用订单确认-新建订单功能！");
                     return false;
                 }

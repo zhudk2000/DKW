@@ -173,24 +173,6 @@ function approve() {
     );
 }
 
-//function un_approve() {
-
-//    //alert("approve_" + $("#maingrid").jqGrid('getCell', idx, "Order_id"));
-//    var selected = list.getSelectedObj();
-//    var tempObj = layer.confirm("确定要修改此订单[" + selected.Order_id + "]的状态为驳回吗？",
-//        null,
-//        function () {
-//            layer.close(tempObj);
-//            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "3" }, function (data) {
-//                layer.msg(data.Message);
-//                if (data.Status) {
-//                    list.reload();
-//                }
-//            }, "json");
-//        }
-//    );
-//}
-
 function un_approve() {
     var selected = list.getSelectedObj();
     if (selected == null) {

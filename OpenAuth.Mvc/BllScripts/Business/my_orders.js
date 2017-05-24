@@ -73,7 +73,9 @@ function MainGrid() {
                     width: 100
                 }
             ],
+            mtype: 'POST',
             url: url,
+            postData: { page: 1, rows: 30, cid: $("#qryCustomerID").val()},
             datatype: "json",
 
             viewrecords: true,
