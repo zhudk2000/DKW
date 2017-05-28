@@ -26,6 +26,7 @@ namespace OpenAuth.Domain.Business
             string Ar_Status = string.Empty;
             string Remark = string.Empty;
 
+            float AvgUnitPrice = 0;
             float Amount = 0;
             int Quantity = 0;
         }
@@ -48,6 +49,7 @@ namespace OpenAuth.Domain.Business
 
         public float Amount { get; set; }
         public int Quantity { get; set; }
+        public float Unit_price { get; set; }
     }
     
 }

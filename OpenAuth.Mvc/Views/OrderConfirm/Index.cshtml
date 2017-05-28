@@ -90,7 +90,14 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label no-padding-right" for=""> 计划箱数 </label>
                     <div class="col-sm-2">
-                        <input type="text" id="Quantity" v-model="Quantity" placeholder="计划箱数" maxlength="10" isvalid="yes" checkexpession="Num" errormsg="计划箱数" />
+                        <input type="text" id="Quantity" v-model="Quantity" v-on:change="reCalUnitPrice" placeholder="计划箱数" maxlength="10" isvalid="yes" checkexpession="Num" errormsg="计划箱数" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label no-padding-right" for="">每箱单价</label>
+                    <div class="col-sm-2">
+                        <input type="text" id="Unit_price" v-model="Unit_price" placeholder="每箱单价" maxlength="10" isvalid="yes" checkexpession="Num" errormsg="每箱单价" />
                     </div>
                 </div>
 
@@ -121,7 +128,7 @@
                     <label class="col-sm-1 control-label no-padding-right" for=""> 送箱地址 </label>
                     <div class="col-sm-6">
                         <input type="text" isvalid="yes" checkexpession="NotNull" errormsg="送箱地址" class="input-xxlarge" id="Contact_address" v-model="Contact_address" placeholder="请输入送箱地址" maxlength="100" />
-                        <input type="hidden" id="Unit_price" value="5" />
+                        @*<input type="hidden" id="Unit_price" value="5" />*@
                         @*<input type="hidden" id="Customer_id" v-model="Customer_id" />
                         <input type="hidden" id="Customer_name" v-model="Customer_name" />*@
                         <input type="hidden" id="User_ID" value='@OpenAuth.App.SSO.AuthUtil.GetUserName()' />

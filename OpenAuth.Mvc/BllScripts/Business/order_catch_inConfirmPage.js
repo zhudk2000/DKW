@@ -1,5 +1,10 @@
 ﻿var vm = new Vue({
-    el: '#editDlg'
+    el: '#editDlg',
+    methods: {
+        reCalUnitPrice: function (e) {
+            vm.$data.Unit_price = getDocStoreUnitPriceByQty(vm.$data.Quantity);
+        }
+    }
 });
 
 //添加（编辑）对话框
@@ -10,7 +15,7 @@ var editDlg = function () {
             type: 1,
             skin: 'layui-layer-rim', //加上边框
             title: "录入订单", //不显示标题
-            area: ['600px', '480px'], //宽高
+            area: ['600px', '520px'], //宽高
             content: $('#editDlg'), //捕获的元素
             btn: ['保存', '关闭'],
             yes: function (index, layero) {
@@ -52,7 +57,7 @@ var editDlg = function () {
                                 }
                             }, "json");
                             //$("#divOrderCatch").hide();
-                            
+
                             showPrintPreview();
                             //$("#divOrderCatchPreview").show();
                         }
@@ -64,7 +69,7 @@ var editDlg = function () {
                         var tempObj = layer.confirm("确定要修改吗？",
                             null,
                             function () {
-                                vm.$data.Unit_price = getDocStoreUnitPriceByQty(vm.$data.Quantity);
+                                //vm.$data.Unit_price = getDocStoreUnitPriceByQty(vm.$data.Quantity);
                                 vm.$data.Amount = vm.$data.Unit_price * vm.$data.Quantity;
                                 layer.close(tempObj);
                                 $.post("/OrderManager/Update", vm.$data, function (data) {
@@ -85,7 +90,7 @@ var editDlg = function () {
                 $("#editDlg").hide();
             }
         });
-    }
+    };
     return {
         add: function () {  //弹出添加
             update = false;
@@ -102,7 +107,7 @@ var editDlg = function () {
             vm.$set('$data', ret);
             //$("#CustomerCode").attr("readonly", "readonly");
         }
-    };
+    }
 }();
 
 function add() {
@@ -136,3 +141,9 @@ function showPrintPreview() {
 $("#btnPrint").click(function () {
     doPrintDiv("divPrintArea");
 });
+
+//$("#Quantity").change(function () {
+//    // getDocStoreUnitPriceByQty(vm.$data.Quantity)
+//    vm.$data.Unit_price = getDocStoreUnitPriceByQty(vm.$data.Quantity);
+//    //$("#Unit_price").val(vm.$data.Unit_price);
+//});

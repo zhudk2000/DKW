@@ -25,7 +25,8 @@ function MainGrid() {
                     index: 'Customer_id',
                     name: 'Customer_id',
                     label: '客户编号',
-                    width: 40
+                    width: 40,
+                    hidden: true
                 },
                 {
                     index: 'Customer_name',
@@ -61,6 +62,12 @@ function MainGrid() {
                     index: 'Quantity',
                     name: 'Quantity',
                     label: '箱数',
+                    width: 40
+                },
+                {
+                    index: 'Unit_price',
+                    name: 'Unit_price',
+                    label: '单价',
                     width: 40
                 },
                 {
@@ -229,7 +236,7 @@ var editDlg2 = function () {
             btn: ['保存', '关闭'],
             yes: function (index, layero) {
                 var isContinue = true;
-                if (!$("#editForm").Validform()) {
+                if (!$("#editForm2").Validform()) {
                     //validation failed
                     isContinue = false;
                 }
