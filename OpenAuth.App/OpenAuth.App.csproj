@@ -89,6 +89,7 @@
     <Compile Include="Extention\WF_RuntimeInitModel.cs" />
     <Compile Include="Extention\WF_RuntimeModel.cs" />
     <Compile Include="Business\OrderCatchApp.cs" />
+    <Compile Include="SendSmsApp.cs" />
     <Compile Include="ViewModel\OrderCatchVM.cs" />
     <Compile Include="WFFormService.cs" />
     <Compile Include="WFProcessInstanceService.cs" />

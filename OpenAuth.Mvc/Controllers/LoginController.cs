@@ -5,6 +5,7 @@ using Infrastructure;
 using OpenAuth.App.SSO;
 using OpenAuth.Domain.Business;
 using OpenAuth.App.Business;
+using OpenAuth.App;
 
 namespace OpenAuth.Mvc.Controllers
 {
@@ -152,6 +153,21 @@ namespace OpenAuth.Mvc.Controllers
             return JsonHelper.Instance.Serialize(result);
         }
 
+        public string SendSMS(string mobNo, string smsContent)
+        {
+            Response Result = new Response();
+            try
+            {
+                SendSmsApp.SmsSend(mobNo, smsContent);
+
+            }
+            catch (Exception ex)
+            {
+                Result.Status = false;
+                Result.Message = ex.Message;
+            }
+            return JsonHelper.Instance.Serialize(Result);
+        }
 
     }
 }

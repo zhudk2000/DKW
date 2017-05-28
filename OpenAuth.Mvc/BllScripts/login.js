@@ -19,3 +19,12 @@
                 return false;
             });
     });
+
+function forgetPassword() {
+    //$.post("/Login/SendSMS", { mobNo: "13826454946", smsContent: "112233" }, function (data) {
+    //    layer.msg(data.Message);
+    //    if (data.Status) {
+    //        layer.msg("Send SMS successful!");
+    //    }
+    //}, "json");
+}
