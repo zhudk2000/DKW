@@ -213,7 +213,7 @@ where order_id = @order_id and order_line_id = @order_line_id";
 	select h.order_id, h.customer_id, h.customer_name, h.contacts, h.contact_tel, 
 		h.contact_address, h.order_date, h.contract_id, h.sales_name, 
 		h.deliver_date, h.pick_date, h.order_status, h.AR_STATUS, h.Remark,
-		sum(d.amount) amount, sum(d.quantity) qty
+		sum(d.amount) amount, sum(d.quantity) qty, avg(unit_price) unit_price
 	from order_head h, order_details d 
 	where h.order_id = d.order_id ##WHERE## 
 	group by h.order_id, h.customer_id, h.customer_name, h.contacts, h.contact_tel, 
@@ -260,6 +260,8 @@ where order_id = @order_id and order_line_id = @order_line_id";
                     oh.Remark = dr["Remark"].ToString();
                     oh.Amount = float.Parse(dr["amount"].ToString());
                     oh.Quantity = int.Parse(dr["qty"].ToString());
+                    oh.Unit_price = float.Parse(dr["unit_price"].ToString());
+
                     result.Add(oh);
                 }
             }
@@ -366,6 +368,7 @@ where 1 = 1 ";
                     oh.Remark = dr["Remark"].ToString();
                     oh.Amount = float.Parse(dr["amount"].ToString());
                     oh.Quantity = int.Parse(dr["qty"].ToString());
+                    oh.Unit_price = float.Parse(dr["unit_price"].ToString());
 
                     result.Add(oh);
                 }
