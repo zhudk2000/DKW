@@ -12,6 +12,7 @@
                 vm.$data.Customer_id = arr[0];
                 vm.$data.Customer_name = arr[1];
             }
+            vm.$data.Service_item = "存储费";
         }
         //
         $("#btnSubmit").click(function () {
@@ -48,6 +49,14 @@
                         $.post("/OrderManager/SaveOrderCatch", vm.$data, function (data) {
                             layer.msg(data.Message);
                             if (data.Status) {
+                                $.post("/Login/SendSMS", {
+                                    mobNo: vm.$data.Contact_tel,
+                                    smsContent: "您的" + tmp + "已成功下单，目前正在审核中。感谢您的支持！【达库文】"
+                                }, function (data) {
+                                    if (data.Status) {
+                                        //layer.msg("Send SMS successful!");
+                                    }
+                                }, "json");
                             }
                         }, "json");
 

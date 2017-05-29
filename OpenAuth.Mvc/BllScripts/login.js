@@ -18,6 +18,8 @@
                     });
                 return false;
             });
+
+        $("#username")[0].focus();
     });
 
 function forgetPassword() {

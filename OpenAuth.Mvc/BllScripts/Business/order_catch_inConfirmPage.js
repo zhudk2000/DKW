@@ -19,6 +19,7 @@ var editDlg = function () {
             content: $('#editDlg'), //捕获的元素
             btn: ['保存', '关闭'],
             yes: function (index, layero) {
+                vm.$data.Service_item = $("#Service_item").val();
                 var isContinue = true;
                 if (!$("#editForm").Validform()) {
                     //validation failed
@@ -33,8 +34,8 @@ var editDlg = function () {
                             var tmp = getWebserviceStr("/OrderManager/GetNextOrderNumber", {});
                             $("#lblOrderID").text(tmp);
 
-                            $("#Unit_price").val(getDocStoreUnitPriceByQty(vm.$data.Quantity));
-                            vm.$data.Unit_price = $("#Unit_price").val();
+                            //$("#Unit_price").val(getDocStoreUnitPriceByQty(vm.$data.Quantity));
+                            //vm.$data.Unit_price = $("#Unit_price").val();
                             vm.$data.User_ID = $("#User_ID").val();
 
                             $("#lblCustName").text(vm.$data.Customer_name);
@@ -48,6 +49,7 @@ var editDlg = function () {
                             var ttl = vm.$data.Unit_price * vm.$data.Quantity;
                             $("#lblTotalAmount").text(ttl);
                             vm.$data.Amount = ttl;
+                            
 
                             //$("#editDlg").hide();
                             $.post("/OrderManager/SaveOrderCatch", vm.$data, function (data) {
@@ -97,14 +99,18 @@ var editDlg = function () {
             show();
             vm.$set('$data',
                 {
-                    Customer_id: ''
+                    Customer_id: '',
+                    Unit_price:''
                 });
             //$("#CustomerCode").removeAttr("readonly");
         },
         update: function (ret) {  //弹出编辑框
-            update = true;
+            update = true;  
             show();
             vm.$set('$data', ret);
+            //$("#Service_item").val("存储费");
+            //$("#Service_item").find("option[text='存储费']").attr("selected", true); 
+            //vm.$data.Service_item = "存储费";
             //$("#CustomerCode").attr("readonly", "readonly");
         }
     }

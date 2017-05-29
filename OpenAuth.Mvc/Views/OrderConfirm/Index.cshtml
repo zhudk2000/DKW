@@ -24,14 +24,16 @@
                     <div class="widget-body gridwidth">
                         <div class="widget-main">
                             <form class="form-inline">
+                                <input type="hidden" id="hidAction" value='@ViewData["approve_action"]' />
                                 <div class="form-group">
-                                    <input type="hidden" id="hidAction" value='@ViewData["approve_action"]' />
-                                    <label>&nbsp;订单日期:从</label>
-                                    @*<input type="date" class="form-control" id="qryDateFrom" maxlength="30" placeholder="请输入" />*@
-                                    <input id="qryDateFrom" style="width:120px;" class="layui-input" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
-                                    <label>到</label>
-                                    @*<input type="date" class="form-control" id="qryDateTo" maxlength="30" placeholder="请输入" />*@
-                                    <input id="qryDateTo" style="width:120px;" class="layui-input" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
+                                    <div class="layui-inline">
+                                        <label>&nbsp;订单日期:从</label>
+                                        @*<input type="date" class="form-control" id="qryDateFrom" maxlength="30" placeholder="请输入" />*@
+                                        <input id="qryDateFrom" style="width:120px;" class="layui-input-inline" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
+                                        <label class="layui-input-inline">到</label>
+                                        @*<input type="date" class="form-control" id="qryDateTo" maxlength="30" placeholder="请输入" />*@
+                                        <input id="qryDateTo" style="width:120px;" class="layui-input-inline" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -71,7 +73,7 @@
     <!--编辑对话框-->
     <div id="editDlg" style="display: none">
         <div class="col-xs-12">
-            <form class="form-horizontal" id="editForm">
+            <form class="form-horizontal layui-form" id="editForm">
                 <br />
                 <div class="form-group">
                     <label class="col-sm-1 control-label no-padding-right" for="">客户编号</label>
@@ -103,11 +105,11 @@
 
                 <div class="form-group">
                     <label class="col-sm-1 control-label no-padding-right" for=""> 服务项目 </label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         @*<input type="text" id="Service_item" v-model="Service_item" placeholder="请选择" maxlength="60" isvalid="yes" checkexpession="NotNull" errormsg="服务项目" />*@
                         <select id="Service_item" v-model="Service_item" isvalid="yes" checkexpession="NotNull" errormsg="服务项目">
-                            <option value="" selected>请选择服务项目</option>
-                            <option value="存储费">存储费</option>
+                            @*<option value="" selected>请选择服务项目</option>*@
+                            <option value="存储费" selected>存储费</option>
                         </select>
                     </div>
                 </div>
@@ -205,11 +207,16 @@
 <link href="~/Content/scripts/dist/css/bootstrap-select.css" rel="stylesheet" />
 <script src="~/Content/scripts/business/public.js"></script>
 <script src="~/BllScripts/Business/layer_validator.js"></script>
-@*<script src="~/Content/scripts/plugins/datepicker/DatePicker.js"></script>*@
+<link href="~/Content/scripts/layui/css/layui.css" rel="stylesheet"/>
 <script>
+    layui.use('form', function () {
+        var form = layui.form;
+    });
+
     layui.use('laydate', function () {
         var laydate = layui.laydate;
     });
+
 </script>
 <style>
     .ui-jqgrid tr.jqgrow td {
