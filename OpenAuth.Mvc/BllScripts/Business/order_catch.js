@@ -49,7 +49,7 @@
                         $.post("/OrderManager/SaveOrderCatch", vm.$data, function (data) {
                             layer.msg(data.Message);
                             if (data.Status) {
-                                $.post("/Login/SendSMS", {
+                                $.post("/Login/SmsSendSoap", {
                                     mobNo: vm.$data.Contact_tel,
                                     smsContent: "您的" + tmp + "已成功下单，目前正在审核中。感谢您的支持！【达库文】"
                                 }, function (data) {

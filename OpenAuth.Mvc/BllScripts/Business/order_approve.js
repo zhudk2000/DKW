@@ -174,7 +174,7 @@ function approve() {
                 layer.msg(data.Message);
                 if (data.Status) {
                     list.reload();
-                    $.post("/Login/SendSMS", {
+                    $.post("/Login/SmsSendSoap", {
                         mobNo: selected.Contact_tel, smsContent: "您的" + selected.Order_id + "号订单已通过审核，我们的工作人员会马上联系您，请保持电话畅通！【达库文】"
                     }, function (data) {
                         if (data.Status) {

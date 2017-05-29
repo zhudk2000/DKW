@@ -74,5 +74,16 @@ namespace OpenAuth.App
             Console.WriteLine(strErr);
             System.Diagnostics.Trace.WriteLine(strErr);
         }
+
+        public static void SmsSendSoap(string phone, string content)
+        {
+            string extno = "106903223908910";//接入码
+            string account = "000604";			//用户名
+            string password = "GkZ9XH31";	//密码   
+            ServiceReference1.Soap57ProviderPortTypeClient ServiceReference2 = new ServiceReference1.Soap57ProviderPortTypeClient();
+            string result = ServiceReference2.Submit(account, password, extno, content, phone);
+            System.Diagnostics.Debug.WriteLine(result);
+        }
+
     }
 }

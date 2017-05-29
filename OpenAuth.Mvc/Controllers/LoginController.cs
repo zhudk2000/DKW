@@ -169,5 +169,21 @@ namespace OpenAuth.Mvc.Controllers
             return JsonHelper.Instance.Serialize(Result);
         }
 
+        [HttpPost]
+        public string SendSMS_Soap(string mobNo, string smsContent)
+        {
+            Response Result = new Response();
+            try
+            {
+                SendSmsApp.SmsSendSoap(mobNo, smsContent);
+
+            }
+            catch (Exception ex)
+            {
+                Result.Status = false;
+                Result.Message = ex.Message;
+            }
+            return JsonHelper.Instance.Serialize(Result);
+        }
     }
 }

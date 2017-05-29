@@ -23,7 +23,7 @@
     });
 
 function forgetPassword() {
-    //$.post("/Login/SendSMS", { mobNo: "13826454946", smsContent: "112233" }, function (data) {
+    //$.post("/Login/SendSMS_Soap", { mobNo: "13826454946", smsContent: "测试短信112233【】" }, function (data) {
     //    layer.msg(data.Message);
     //    if (data.Status) {
     //        layer.msg("Send SMS successful!");

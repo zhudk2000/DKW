@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:suds="http://www.w3.org/2000/wsdl/suds" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps/soaps" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns3="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib%2C%20Version%3D3.0.1.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dc1a16487c920c3dc" xmlns:ns2="http://schemas.microsoft.com/clr/nsassem/weblib/weblib%2C%20Version%3D3.0.1.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dc1a16487c920c3dc" xmlns:ns1="http://schemas.microsoft.com/clr/ns/System" xmlns:ns0="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps/soaps" xmlns="http://schemas.xmlsoap.org/wsdl/" name="Soap57Provider" targetNamespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps/soaps" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps/soaps">
+      <xsd:complexType name="ArrayOfString">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib%2C%20Version%3D3.0.1.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dc1a16487c920c3dc">
+      <xsd:complexType name="ArrayOfString">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="Soap57Provider.RetrieveAllInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.RetrieveAllOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.SubmitInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="accessCode" type="xsd:string" />
+    <wsdl:part name="content" type="xsd:string" />
+    <wsdl:part name="mobileString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.SubmitOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.InitializeLifetimeServiceInput" />
+  <wsdl:message name="Soap57Provider.InitializeLifetimeServiceOutput">
+    <wsdl:part name="return" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.RetrieveAllExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.RetrieveAllExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.BatchSubmitExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="accessCode" type="xsd:string" />
+    <wsdl:part name="mobileContentArray" type="ns0:ArrayOfString" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.BatchSubmitExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.SubmitExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="accessCode" type="xsd:string" />
+    <wsdl:part name="content" type="xsd:string" />
+    <wsdl:part name="mobileString" type="xsd:string" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.SubmitExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryBalanceExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryBalanceExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryReportExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryReportExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryMoExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryMoExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryMoInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryMoOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryReportInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryReportOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryBalanceInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.QueryBalanceOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.BatchSubmitInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="accessCode" type="xsd:string" />
+    <wsdl:part name="mobileContentArray" type="ns0:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="Soap57Provider.BatchSubmitOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryMoInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryMoOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryReportInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryReportOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryBalanceInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryBalanceOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.RetrieveAllInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.RetrieveAllOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.SubmitInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="accessCode" type="xsd:string" />
+    <wsdl:part name="content" type="xsd:string" />
+    <wsdl:part name="mobileString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.SubmitOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.BatchSubmitInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="accessCode" type="xsd:string" />
+    <wsdl:part name="mobileContentArray" type="ns3:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.BatchSubmitOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryMoExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryMoExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryReportExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryReportExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryBalanceExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.QueryBalanceExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.SubmitExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="accessCode" type="xsd:string" />
+    <wsdl:part name="content" type="xsd:string" />
+    <wsdl:part name="mobileString" type="xsd:string" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.SubmitExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.BatchSubmitExInput">
+    <wsdl:part name="spID" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="accessCode" type="xsd:string" />
+    <wsdl:part name="mobileContentArray" type="ns3:ArrayOfString" />
+    <wsdl:part name="rt" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ISoap57.BatchSubmitExOutput">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="Soap57ProviderPortType">
+    <wsdl:operation name="RetrieveAll" parameterOrder="spID password">
+      <wsdl:input name="RetrieveAllRequest" message="ns0:Soap57Provider.RetrieveAllInput" />
+      <wsdl:output name="RetrieveAllResponse" message="ns0:Soap57Provider.RetrieveAllOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="Submit" parameterOrder="spID password accessCode content mobileString">
+      <wsdl:input name="SubmitRequest" message="ns0:Soap57Provider.SubmitInput" />
+      <wsdl:output name="SubmitResponse" message="ns0:Soap57Provider.SubmitOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="InitializeLifetimeService">
+      <wsdl:input name="InitializeLifetimeServiceRequest" message="ns0:Soap57Provider.InitializeLifetimeServiceInput" />
+      <wsdl:output name="InitializeLifetimeServiceResponse" message="ns0:Soap57Provider.InitializeLifetimeServiceOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveAllEx" parameterOrder="spID password rt">
+      <wsdl:input name="RetrieveAllExRequest" message="ns0:Soap57Provider.RetrieveAllExInput" />
+      <wsdl:output name="RetrieveAllExResponse" message="ns0:Soap57Provider.RetrieveAllExOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="BatchSubmitEx" parameterOrder="spID password accessCode mobileContentArray rt">
+      <wsdl:input name="BatchSubmitExRequest" message="ns0:Soap57Provider.BatchSubmitExInput" />
+      <wsdl:output name="BatchSubmitExResponse" message="ns0:Soap57Provider.BatchSubmitExOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitEx" parameterOrder="spID password accessCode content mobileString rt">
+      <wsdl:input name="SubmitExRequest" message="ns0:Soap57Provider.SubmitExInput" />
+      <wsdl:output name="SubmitExResponse" message="ns0:Soap57Provider.SubmitExOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalanceEx" parameterOrder="spID password rt">
+      <wsdl:input name="QueryBalanceExRequest" message="ns0:Soap57Provider.QueryBalanceExInput" />
+      <wsdl:output name="QueryBalanceExResponse" message="ns0:Soap57Provider.QueryBalanceExOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportEx" parameterOrder="spID password rt">
+      <wsdl:input name="QueryReportExRequest" message="ns0:Soap57Provider.QueryReportExInput" />
+      <wsdl:output name="QueryReportExResponse" message="ns0:Soap57Provider.QueryReportExOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryMoEx" parameterOrder="spID password rt">
+      <wsdl:input name="QueryMoExRequest" message="ns0:Soap57Provider.QueryMoExInput" />
+      <wsdl:output name="QueryMoExResponse" message="ns0:Soap57Provider.QueryMoExOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryMo" parameterOrder="spID password">
+      <wsdl:input name="QueryMoRequest" message="ns0:Soap57Provider.QueryMoInput" />
+      <wsdl:output name="QueryMoResponse" message="ns0:Soap57Provider.QueryMoOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryReport" parameterOrder="spID password">
+      <wsdl:input name="QueryReportRequest" message="ns0:Soap57Provider.QueryReportInput" />
+      <wsdl:output name="QueryReportResponse" message="ns0:Soap57Provider.QueryReportOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance" parameterOrder="spID password">
+      <wsdl:input name="QueryBalanceRequest" message="ns0:Soap57Provider.QueryBalanceInput" />
+      <wsdl:output name="QueryBalanceResponse" message="ns0:Soap57Provider.QueryBalanceOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="BatchSubmit" parameterOrder="spID password accessCode mobileContentArray">
+      <wsdl:input name="BatchSubmitRequest" message="ns0:Soap57Provider.BatchSubmitInput" />
+      <wsdl:output name="BatchSubmitResponse" message="ns0:Soap57Provider.BatchSubmitOutput" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ISoap57PortType">
+    <wsdl:operation name="QueryMo" parameterOrder="spID password">
+      <wsdl:input name="QueryMoRequest" message="ns0:ISoap57.QueryMoInput" />
+      <wsdl:output name="QueryMoResponse" message="ns0:ISoap57.QueryMoOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryReport" parameterOrder="spID password">
+      <wsdl:input name="QueryReportRequest" message="ns0:ISoap57.QueryReportInput" />
+      <wsdl:output name="QueryReportResponse" message="ns0:ISoap57.QueryReportOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance" parameterOrder="spID password">
+      <wsdl:input name="QueryBalanceRequest" message="ns0:ISoap57.QueryBalanceInput" />
+      <wsdl:output name="QueryBalanceResponse" message="ns0:ISoap57.QueryBalanceOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveAll" parameterOrder="spID password">
+      <wsdl:input name="RetrieveAllRequest" message="ns0:ISoap57.RetrieveAllInput" />
+      <wsdl:output name="RetrieveAllResponse" message="ns0:ISoap57.RetrieveAllOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="Submit" parameterOrder="spID password accessCode content mobileString">
+      <wsdl:input name="SubmitRequest" message="ns0:ISoap57.SubmitInput" />
+      <wsdl:output name="SubmitResponse" message="ns0:ISoap57.SubmitOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="BatchSubmit" parameterOrder="spID password accessCode mobileContentArray">
+      <wsdl:input name="BatchSubmitRequest" message="ns0:ISoap57.BatchSubmitInput" />
+      <wsdl:output name="BatchSubmitResponse" message="ns0:ISoap57.BatchSubmitOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryMoEx" parameterOrder="spID password rt">
+      <wsdl:input name="QueryMoExRequest" message="ns0:ISoap57.QueryMoExInput" />
+      <wsdl:output name="QueryMoExResponse" message="ns0:ISoap57.QueryMoExOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportEx" parameterOrder="spID password rt">
+      <wsdl:input name="QueryReportExRequest" message="ns0:ISoap57.QueryReportExInput" />
+      <wsdl:output name="QueryReportExResponse" message="ns0:ISoap57.QueryReportExOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalanceEx" parameterOrder="spID password rt">
+      <wsdl:input name="QueryBalanceExRequest" message="ns0:ISoap57.QueryBalanceExInput" />
+      <wsdl:output name="QueryBalanceExResponse" message="ns0:ISoap57.QueryBalanceExOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitEx" parameterOrder="spID password accessCode content mobileString rt">
+      <wsdl:input name="SubmitExRequest" message="ns0:ISoap57.SubmitExInput" />
+      <wsdl:output name="SubmitExResponse" message="ns0:ISoap57.SubmitExOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="BatchSubmitEx" parameterOrder="spID password accessCode mobileContentArray rt">
+      <wsdl:input name="BatchSubmitExRequest" message="ns0:ISoap57.BatchSubmitExInput" />
+      <wsdl:output name="BatchSubmitExResponse" message="ns0:ISoap57.BatchSubmitExOutput" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Soap57ProviderBinding" type="ns0:Soap57ProviderPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <suds:class type="ns0:Soap57Provider" rootType="MarshalByRefObject">
+      <suds:implements type="ns2:ISoap57" />
+    </suds:class>
+    <wsdl:operation name="RetrieveAll">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#RetrieveAll" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="RetrieveAllRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="RetrieveAllResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#Submit" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="SubmitRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="SubmitResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitializeLifetimeService">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#InitializeLifetimeService" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="InitializeLifetimeServiceRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="InitializeLifetimeServiceResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveAllEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#RetrieveAllEx" />
+      <suds:method attributes="public" />
+      <wsdl:input name="RetrieveAllExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="RetrieveAllExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BatchSubmitEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#BatchSubmitEx" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="BatchSubmitExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="BatchSubmitExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#SubmitEx" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="SubmitExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="SubmitExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalanceEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#QueryBalanceEx" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="QueryBalanceExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryBalanceExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#QueryReportEx" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="QueryReportExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryReportExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryMoEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#QueryMoEx" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="QueryMoExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryMoExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryMo">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#QueryMo" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="QueryMoRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryMoResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReport">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#QueryReport" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="QueryReportRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryReportResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#QueryBalance" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="QueryBalanceRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryBalanceResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BatchSubmit">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps#BatchSubmit" />
+      <suds:method attributes="public virtual" />
+      <wsdl:input name="BatchSubmitRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="BatchSubmitResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/com.softwee.smgw.soaps.Soap57Provider/soaps" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ISoap57Binding" type="ns0:ISoap57PortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <suds:interface type="ns2:ISoap57">
+    </suds:interface>
+    <wsdl:operation name="QueryMo">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#QueryMo" />
+      <wsdl:input name="QueryMoRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryMoResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReport">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#QueryReport" />
+      <wsdl:input name="QueryReportRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryReportResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalance">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#QueryBalance" />
+      <wsdl:input name="QueryBalanceRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryBalanceResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveAll">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#RetrieveAll" />
+      <wsdl:input name="RetrieveAllRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="RetrieveAllResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#Submit" />
+      <wsdl:input name="SubmitRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="SubmitResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BatchSubmit">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#BatchSubmit" />
+      <wsdl:input name="BatchSubmitRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="BatchSubmitResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryMoEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#QueryMoEx" />
+      <wsdl:input name="QueryMoExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryMoExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#QueryReportEx" />
+      <wsdl:input name="QueryReportExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryReportExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBalanceEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#QueryBalanceEx" />
+      <wsdl:input name="QueryBalanceExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="QueryBalanceExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#SubmitEx" />
+      <wsdl:input name="SubmitExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="SubmitExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BatchSubmitEx">
+      <soap:operation soapAction="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib#BatchSubmitEx" />
+      <wsdl:input name="BatchSubmitExRequest">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="BatchSubmitExResponse">
+        <soap:body use="encoded" namespace="http://schemas.microsoft.com/clr/nsassem/weblib.ISoap57/weblib" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Soap57ProviderService">
+    <wsdl:port name="Soap57ProviderPort" binding="ns0:Soap57ProviderBinding">
+      <soap:address location="http://www.smswang.net:7801/sms" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
