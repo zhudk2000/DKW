@@ -23,15 +23,17 @@
                     </div>
                     <div class="widget-body gridwidth">
                         <div class="widget-main">
-                            <div class="form-inline">
+                            <form class="form-inline">
+                                <input type="hidden" id="hidAction" value='@ViewData["approve_action"]' />
                                 <div class="form-group">
-                                    <input type="hidden" id="hidAction" value='@ViewData["approve_action"]' />
-                                    <label>&nbsp;订单日期:从</label>
-                                    @*<input type="date" class="form-control" id="qryDateFrom" maxlength="30" placeholder="请输入" />*@
-                                    <input id="qryDateFrom" style="width:120px;" class="layui-input" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
-                                    <label>到</label>
-                                    @*<input type="date" class="form-control" id="qryDateTo" maxlength="30" placeholder="请输入" />*@
-                                    <input id="qryDateTo" style="width:120px;" class="layui-input" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
+                                    <div class="layui-inline">
+                                        <label>&nbsp;订单日期:从</label>
+                                        @*<input type="date" class="form-control" id="qryDateFrom" maxlength="30" placeholder="请输入" />*@
+                                        <input id="qryDateFrom" style="width:120px;" class="layui-input-inline" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
+                                        <label class="layui-input-inline">到</label>
+                                        @*<input type="date" class="form-control" id="qryDateTo" maxlength="30" placeholder="请输入" />*@
+                                        <input id="qryDateTo" style="width:120px;" class="layui-input-inline" placeholder="请输入" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -48,18 +50,17 @@
                                     <select id="qryOrderStatus" class="form-control" style="width:80px;">
                                         <option value="">全部</option>
                                         <option value="0">未确认</option>
-                                        <option value="1">待审核</option>
+                                        <option value="1" selected>待审核</option>
                                         <option value="2">已审核</option>
                                     </select>
                                 </div>
                                 <button id="btnQuery" class="btn-primary">查 询</button>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 ">
-                                    <table id="maingrid"></table>
-                                    <div id="grid-pager"></div>
-                                </div>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <table id="maingrid"></table>
+                                <div id="grid-pager"></div>
                             </div>
                         </div>
                     </div>
@@ -67,26 +68,99 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div id="editDlg2" style="display: none">
-        <div class="col-xs-12">
-            <form class="form-horizontal" id="editForm2">
-                <br />
-
-                <div class="form-group">
-                    <label class="col-sm-1 control-label no-padding-right" for=""> 驳回理由 </label>
-                    <div class="col-sm-2">
-                        @*<input type="text" id="Remark" v-model="Quantity" placeholder="请输入驳回理由" maxlength="100" errormsg="驳回理由" />*@
-                        <textarea id="Remark" v-model="Remark" rows="3" cols="30" isvalid="yes" checkexpession="NotNull" errormsg="驳回理由"></textarea>
-                    </div>
+<div id="editDlg" style="display: none">
+    <div class="col-xs-12">
+        <form class="form-horizontal layui-form" id="editForm">
+            <br />
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right" for="">客户编号</label>
+                <div class="col-sm-2">
+                    <input type="text" id="Customer_id" v-model="Customer_id" maxlength="10" isvalid="yes" checkexpession="NotNull" errormsg="客户编号" />
                 </div>
+            </div>
 
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right" for="">客户名称</label>
+                <div class="col-sm-2">
+                    <input type="text" id="Customer_name" v-model="Customer_name" maxlength="10" isvalid="yes" checkexpession="NotNull" errormsg="客户名称" />
+                </div>
+            </div>
 
-            </form>
-        </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right" for=""> 计划箱数 </label>
+                <div class="col-sm-2">
+                    <input type="text" id="Quantity" v-model="Quantity" v-on:change="reCalUnitPrice" placeholder="计划箱数" maxlength="10" isvalid="yes" checkexpession="Num" errormsg="计划箱数" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right" for="">每箱单价</label>
+                <div class="col-sm-2">
+                    <input type="text" id="Unit_price" v-model="Unit_price" placeholder="每箱单价" maxlength="10" isvalid="yes" checkexpession="Double" errormsg="每箱单价" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right" for=""> 服务项目 </label>
+                <div class="col-sm-4">
+                    @*<input type="text" id="Service_item" v-model="Service_item" placeholder="请选择" maxlength="60" isvalid="yes" checkexpession="NotNull" errormsg="服务项目" />*@
+                    <select id="Service_item" v-model="Service_item" isvalid="yes" checkexpession="NotNull" errormsg="服务项目">
+                        @*<option value="" selected>请选择服务项目</option>*@
+                        <option value="存储费" selected>存储费</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right" for=""> 联系人</label>
+                <div class="col-sm-2">
+                    <input type="text" id="Contacts" v-model="Contacts" placeholder="请输入" maxlength="30" isvalid="yes" checkexpession="NotNull" errormsg="联系人" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right" for=""> 手机号码 </label>
+                <div class="col-sm-2">
+                    <input type="text" id="Contact_tel" v-model="Contact_tel" placeholder="请输入" maxlength="11" isvalid="yes" checkexpession="Mobile" errormsg="手机号码" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right" for=""> 送箱地址 </label>
+                <div class="col-sm-6">
+                    <input type="text" isvalid="yes" checkexpession="NotNull" errormsg="送箱地址" class="input-xxlarge" id="Contact_address" v-model="Contact_address" placeholder="请输入送箱地址" maxlength="100" />
+                    @*<input type="hidden" id="Unit_price" value="5" />*@
+                    @*<input type="hidden" id="Customer_id" v-model="Customer_id" />
+                        <input type="hidden" id="Customer_name" v-model="Customer_name" />*@
+                    <input type="hidden" id="User_ID" value='@OpenAuth.App.SSO.AuthUtil.GetUserName()' />
+                    <input type="hidden" id="Amount" />
+                </div>
+            </div>
+
+        </form>
+
     </div>
+</div>
 
-</div><!-- /.page-content -->
+<div id="editDlg2" style="display: none">
+    <div class="col-xs-12">
+        <form class="form-horizontal" id="editForm2">
+            <br />
+
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right" for=""> 驳回理由 </label>
+                <div class="col-sm-2">
+                    @*<input type="text" id="Remark" v-model="Quantity" placeholder="请输入驳回理由" maxlength="100" errormsg="驳回理由" />*@
+                    <textarea id="Remark" v-model="Remark" rows="3" cols="30" isvalid="yes" checkexpession="NotNull" errormsg="驳回理由"></textarea>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<!-- /.page-content -->
 <!--编辑对话框-->
 
 
@@ -94,14 +168,20 @@
 <script src="~/BllScripts/grid.js"></script>
 <script src="~/BllScripts/parentTreeMultiple.js"></script>
 <script src="~/BllScripts/Business/order_approve.js"></script>
+<script src="~/BllScripts/Business/order_catch_inConfirmPage.js"></script>
 <script src="~/BllScripts/jqEvent.js"></script>
 <script src="~/Content/scripts/utils/ui.js"></script>
 <script src="~/Content/scripts/dist/js/bootstrap-select.js"></script>
 <link href="~/Content/scripts/dist/css/bootstrap-select.css" rel="stylesheet" />
 <script src="~/Content/scripts/business/public.js"></script>
 <script src="~/BllScripts/Business/layer_validator.js"></script>
+<link href="~/Content/scripts/layui/css/layui.css" rel="stylesheet" />
 
 <script>
+    layui.use('form', function () {
+        var form = layui.form;
+    });
+
     layui.use('laydate', function () {
         var laydate = layui.laydate;
     });

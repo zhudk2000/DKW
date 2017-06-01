@@ -24,7 +24,7 @@
                     return false;
                 }
 
-                var tempObj = layer.confirm("您确定要保存吗？",
+                var tempObj = layer.confirm("您确定要提交吗？",
                     null,
                     function () {
                         layer.close(tempObj);

@@ -280,7 +280,7 @@ where order_id = @order_id and order_line_id = @order_line_id";
             DbCommand cmd = base.GetDbCommandObject();
             cmd.Parameters.Clear();
             string sql =
-@"select ROW_NUMBER() over(order by order_id) as seq, a.* 
+@"select ROW_NUMBER() over(order by order_id desc) as seq, a.* 
 from (
 " + getOrderQueryString() + @"
 ) a 
@@ -308,14 +308,22 @@ where 1 = 1 ";
             //
             if (ordStatus != "")
             {
-                sql += " and order_status = @ordStatus";
-                db.NewParaWithValue("ordStatus", DbType.String, ordStatus, ref cmd);
+                if (ordStatus == "0")
+                {
+                    sql += " and isnull(order_status, 0) in ('0', '3')";
+                }
+                else
+                {
+                    sql += " and order_status = @ordStatus";
+                    db.NewParaWithValue("ordStatus", DbType.String, ordStatus, ref cmd);
+                }
             }
             if (custID != "")
             {
                 sql += " and customer_id = @custId";
                 db.NewParaWithValue("custId", DbType.String, custID, ref cmd);
             }
+
             cmd.CommandText = sql;
 
             return cmd;

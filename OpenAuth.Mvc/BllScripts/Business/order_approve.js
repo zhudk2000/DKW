@@ -1,15 +1,20 @@
-﻿var vm = new Vue({
+﻿var vm2 = new Vue({
     el: '#editDlg2'
 });
 //grid列表模块
 function MainGrid() {
-    var url = '/OrderManager/Load';
+    var url = '/OrderManager/Query';
     this.maingrid = $('#maingrid')
         .jqGrid({
             colModel: [
                 {
                     name: 'Order_id',
                     index: 'Order_id',
+                    hidden: true
+                },
+                {
+                    name: 'Order_id_1',
+                    index: 'Order_id_1',
                     label: '订单号',
                     width: 60
                 },
@@ -90,6 +95,11 @@ function MainGrid() {
             ],
             url: url,
             datatype: "json",
+            postData: {
+                dteFrom: $("#qryDateFrom").val(), dteTo: $("#qryDateTo").val(),
+                ordNO: $("#qryOrderID").val(), cnm: $("#qryCustomerName").val(),
+                ordStatus: $("#qryOrderStatus").val(), page: 1, rows: 30
+            },
 
             viewrecords: true,
             rowNum: 30,
@@ -125,6 +135,8 @@ function MainGrid() {
                         s = "驳回";
 
                     $("#maingrid").jqGrid('setRowData', ids[i], { act: s });
+                    $("#maingrid").jqGrid('setRowData', ids[i], {
+                        Order_id_1: "<a href='#' class='btn-link' onclick='show_readonly(" + c + ")'>" + $("#maingrid").jqGrid('getCell', c, "Order_id") + "</a>" });
                 }
             }
 
@@ -229,6 +241,13 @@ $(function () {
 
 });
 
+function show_readonly(idx) {
+    var selected = $("#maingrid").jqGrid('getRowData', idx);
+    if (selected == null) {
+        return;
+    }
+    editDlg.show_readonly(selected);
+}
 
 //添加（编辑）对话框
 var editDlg2 = function () {
@@ -249,7 +268,7 @@ var editDlg2 = function () {
                 }
                 //
                 if (isContinue && update) {
-                    var tempObj = layer.confirm("您确定要驳回次订单吗？",
+                    var tempObj = layer.confirm("您确定要驳回此订单吗？",
                         null,
                         function () {
                             layer.close(tempObj);
@@ -258,8 +277,8 @@ var editDlg2 = function () {
                             var orderId = selected.Order_id;
 
                             //vm.$data.Remark;
-                            vm.$data.Order_id = orderId;
-                            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "3", remark: vm.$data.Remark}, function (data) {
+                            vm2.$data.Order_id = orderId;
+                            $.post("/OrderManager/UpdateOrderStatus", { ordID: selected.Order_id, statusTo: "3", remark: vm2.$data.Remark}, function (data) {
                                 layer.msg(data.Message);
                                 if (data.Status) {
                                     list.reload();
@@ -281,7 +300,7 @@ var editDlg2 = function () {
         update: function (ret) {  //弹出编辑框
             update = true;
             show();
-            vm.$set('$data', ret);
+            vm2.$set('$data', ret);
             //$("#CustomerCode").attr("readonly", "readonly");
         }
     };

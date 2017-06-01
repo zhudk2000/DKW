@@ -10,6 +10,17 @@
 //添加（编辑）对话框
 var editDlg = function () {
     var update = false;
+    var show_readonly = function () {
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim', //加上边框
+            title: "查看订单", //不显示标题
+            area: ['600px', '520px'], //宽高
+            content: $('#editDlg'), //捕获的元素
+            btn: ['关闭'],
+            yes: function (index, layero) { layer.close(index);}
+        })
+    };
     var show = function () {
         layer.open({
             type: 1,
@@ -74,7 +85,7 @@ var editDlg = function () {
                                 //vm.$data.Unit_price = getDocStoreUnitPriceByQty(vm.$data.Quantity);
                                 vm.$data.Amount = vm.$data.Unit_price * vm.$data.Quantity;
                                 layer.close(tempObj);
-                                $.post("/OrderManager/Update", vm.$data, function (data) {
+                                $.post("/OrderManager/UpdateOrder", vm.$data, function (data) {
                                     layer.msg(data.Message);
                                     if (data.Status) {
                                         list.reload();
@@ -112,6 +123,10 @@ var editDlg = function () {
             //$("#Service_item").find("option[text='存储费']").attr("selected", true); 
             //vm.$data.Service_item = "存储费";
             //$("#CustomerCode").attr("readonly", "readonly");
+        },
+        show_readonly: function (ret) {
+            show_readonly();
+            vm.$set('$data', ret);
         }
     }
 }();

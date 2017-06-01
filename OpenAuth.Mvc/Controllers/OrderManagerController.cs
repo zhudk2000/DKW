@@ -144,7 +144,7 @@ namespace OpenAuth.Mvc.Controllers
         }
 
         [HttpPost]
-        public string Update(OrderCatchVM view)
+        public string UpdateOrder(OrderCatchVM view)
         {
             Infrastructure.Response result = new Infrastructure.Response();
             try
