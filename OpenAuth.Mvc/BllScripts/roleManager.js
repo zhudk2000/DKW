@@ -155,6 +155,14 @@ var editDlg = function () {
 
 //删除
 function del() {
+    var selected = list.getSelectedObj();
+    if (selected == null) {
+        return;
+    }
+    if (selected.Name == "外部客户下单") {
+        layer.msg("系统内置角色，不能删除！");
+        return;
+    }
     list.del("Id", "/RoleManager/Delete",function() {
         list.reload();
         ztree.reload();

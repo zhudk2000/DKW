@@ -140,6 +140,14 @@ var editDlg = function () {
             content: $('#editDlg'), //捕获的元素
             btn: ['保存', '关闭'],
             yes: function (index, layero) {
+                if (!vm.$data.Organizations) {
+                    layer.msg("组织机构不能为空！");
+                    return;
+                }
+                if (vm.$data.Organizations == "") {
+                    layer.msg("组织机构不能为空！");
+                    return;
+                }
                 $.post("/UserManager/Add", vm.$data, function (data) {
                     layer.msg(data.Message);
                     if (data.Status) {
