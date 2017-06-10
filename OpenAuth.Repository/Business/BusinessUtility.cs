@@ -51,7 +51,30 @@ namespace OpenAuth.Repository.Business
             finally { cmd.Dispose(); }
 
             return cust;
-            
+
+        }
+
+        public void WriteDataChangeLog(string logType, string tabName, string dataFrom, string dataTo, string changeUser)
+        {
+            DBUtility db = new DBUtility();
+            DbCommand cmd = base.GetDbCommandObject();
+            string sql =
+@"insert into data_change_log(log_type, table_name, changed_time, changed_by, data_from, data_to)
+values(@log_type, @table_name, getdate(), @changed_by, @data_from, @data_to )";
+            cmd.CommandText = sql;
+            db.NewParaWithValue("log_type", DbType.String, logType, ref cmd);
+            db.NewParaWithValue("table_name", DbType.String, tabName, ref cmd);
+            db.NewParaWithValue("changed_by", DbType.String, changeUser, ref cmd);
+            db.NewParaWithValue("data_from", DbType.String, dataFrom, ref cmd);
+            db.NewParaWithValue("data_to", DbType.String, dataTo, ref cmd);
+
+            try
+            {
+                if (cmd.Connection.State == ConnectionState.Closed) cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e) { throw; }
+            finally { cmd.Dispose(); }
         }
     }
 }

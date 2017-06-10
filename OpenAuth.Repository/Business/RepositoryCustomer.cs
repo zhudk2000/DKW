@@ -93,6 +93,12 @@ end";
                 cmd.Dispose();
             }
             //System.Diagnostics.Debug.WriteLine("1111111");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("user id:").Append(entity.User_Account)
+                .Append(";user name:").Append(entity.User_Name);
+            BusinessUtility bu = new BusinessUtility();
+            bu.WriteDataChangeLog("A", "USER", sb.ToString(), "", "自助");
+
         }
 
         public int GetNextCustID()

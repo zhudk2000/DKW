@@ -123,6 +123,16 @@ where order_date >= left(convert(varchar, getdate(), 120), 10)
                 if (dt != null) dt.Dispose();
                 cmd.Dispose();
             }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("order id:").Append(view.Order_id)
+                .Append(";order tel:").Append(view.Contact_tel)
+                .Append(";order address:").Append(view.Contact_address)
+                .Append(";quantity:").Append(view.orderDetail[0].Quantity)
+                .Append(";unit price:").Append(view.orderDetail[0].Unit_price)
+                .Append(";amount:").Append(view.orderDetail[0].Amount);
+            BusinessUtility bu = new BusinessUtility();
+            bu.WriteDataChangeLog("A", "ORDER", sb.ToString(), "", (view.Sales_name == "" ? "-" : view.Sales_name));
         }
 
         public void Update(OrderHeader view)
@@ -182,6 +192,17 @@ where order_id = @order_id and order_line_id = @order_line_id";
                 if (dt != null) dt.Dispose();
                 cmd.Dispose();
             }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("order id:").Append(view.Order_id)
+                .Append(";order tel:").Append(view.Contact_tel)
+                .Append(";order address:").Append(view.Contact_address)
+                .Append(";quantity:").Append(view.orderDetail[0].Quantity)
+                .Append(";unit price:").Append(view.orderDetail[0].Unit_price)
+                .Append(";amount:").Append(view.orderDetail[0].Amount);
+            BusinessUtility bu = new BusinessUtility();
+            bu.WriteDataChangeLog("U", "ORDER", sb.ToString(), "", (view.Sales_name == "" ? "-" : view.Sales_name));
+
         }
 
 
@@ -415,6 +436,13 @@ end";
             }
             catch (Exception e) { throw e; }
             finally { cmd.Dispose(); }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("order id:").Append(ordID)
+                .Append(";order status:").Append(statusTo);
+            BusinessUtility bu = new BusinessUtility();
+            bu.WriteDataChangeLog("U", "ORDER", sb.ToString(), "", (userID == "" ? "-" : userID));
+
         }
 
         public void DeleteOrder(string ordID)
@@ -434,6 +462,11 @@ end";
             }
             catch (Exception e) { throw e; }
             finally { cmd.Dispose(); }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("order id:").Append(ordID);
+            BusinessUtility bu = new BusinessUtility();
+            bu.WriteDataChangeLog("D", "ORDER", sb.ToString(), "", "自助");
         }
     }
 }
