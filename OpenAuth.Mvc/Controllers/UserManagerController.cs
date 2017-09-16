@@ -8,16 +8,20 @@ using OpenAuth.App;
 using OpenAuth.App.ViewModel;
 using OpenAuth.Domain;
 using OpenAuth.Mvc.Models;
- 
+using OpenAuth.App.Business;
+using OpenAuth.App.SSO;
+
 namespace OpenAuth.Mvc.Controllers
 {
     public class UserManagerController : BaseController
     {
         private UserManagerApp _app;
+        private BusinessUserApp _bsApp;
 
         public UserManagerController()
         {
             _app = AutofacExt.GetFromFac<UserManagerApp>();
+            _bsApp = AutofacExt.GetFromFac<BusinessUserApp>();
         }
 
         //
@@ -124,6 +128,42 @@ namespace OpenAuth.Mvc.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// 更改密码
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ChangePassword()
+        {
+            User usr = AuthUtil.GetCurrentUser().User;
+            //string result = "approve";
+            //if (Request["act"] != null)
+            //    result = "boss_approve";
 
+            if (CurrentModule != null)
+            {
+                ViewData["account"] = usr.Account;
+                ViewData["name"] = usr.Name;
+                ViewData["password"] = usr.Password;
+            }
+            //return View();
+            return View();
+        }
+
+        [HttpPost]
+        public String ChangePasswordByAccount(String account, String newPass)
+        {
+            try
+            {
+                _bsApp.ChangePasswordByAccount(account, newPass);
+                Result.Message = "修改密码成功！";
+            }
+            catch (Exception e)
+            {
+                Result.Status = false;
+                Result.Message = e.Message;
+            }
+
+            return JsonHelper.Instance.Serialize(Result);
+        }
     }
 }

@@ -191,6 +191,7 @@
     <Content Include="BllScripts\Business\order_approve.js" />
     <Content Include="BllScripts\Business\order_catch.js" />
     <Content Include="BllScripts\Business\order_catch_inConfirmPage.js" />
+    <Content Include="BllScripts\Business\changePassword.js" />
     <Content Include="BllScripts\Business\user_register.js" />
     <Content Include="BllScripts\categoryManager.js" />
     <Content Include="BllScripts\customermanager.js" />
@@ -1226,6 +1227,7 @@
     <Content Include="Views\OrderManager\MyOrders.cshtml" />
     <Content Include="Views\OrderConfirm\Index.cshtml" />
     <Content Include="Views\OrderApprove\Index.cshtml" />
+    <Content Include="Views\UserManager\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
