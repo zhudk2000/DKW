@@ -19,7 +19,8 @@
     <!-- text fonts -->
     <link rel="stylesheet" href="/Content/ace/css/ace-fonts.css" />
 </head>
-<body class="login-layout img-responsive" style="background-image: url('/Content/Images/login/bg.jpg'); background-repeat:no-repeat; background-size:cover">
+<body class="login-layout img-responsive" style="background-image: url('/Content/Images/login/bg.jpg'); background-repeat:no-repeat; background-size:cover" 
+      onload="username.focus();">
     <div class="main-container"  >
         <div style="height:170px;"></div>
         <div class="main-content">
@@ -50,7 +51,7 @@
                                                 <div class="layui-form-item">
                                                     <label class="layui-form-label">用户名</label>
                                                     <div class="layui-input-block">
-                                                        <input type="text" name="username" placeholder="请输入" lay-verify="required" autocomplete="off" class="layui-input">
+                                                        <input type="text" name="username" id="username" placeholder="请输入" lay-verify="required" autocomplete="off" class="layui-input">
                                                     </div>
                                                 </div>
                                                 <div class="layui-form-item">
@@ -67,8 +68,8 @@
                                                 </div>
                                                 <div class="header"></div>
                                                 <div class="layui-form-item">
-                                                    <div class="col-sm3 layui-inline blue lighter"><a href="#" onclick="forgetPassword()">忘记密码</a></div>
-                                                    <div class="col-sm6 layui-inline"></div>
+                                                    @*<div class="col-sm3 layui-inline blue lighter"><a href="#" onclick="forgetPassword()">忘记密码</a></div>
+                                                    <div class="col-sm6 layui-inline"></div>*@
                                                     <div class="col-sm3 layui-inline blue lighter"><a href="~/Login/Login4Registration">注册新用户</a></div>
                                                 </div>
                                             </form>
